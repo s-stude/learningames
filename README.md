@@ -1,4 +1,4 @@
 Learning Games
 =============
 
-This repo is for LearningGames project.
+This repo is for Learning Games project.
