@@ -1,9 +1,9 @@
-Learning Games
-=============
+# Learning Games : Документация
 
-This repo is for Learning Games project.
+В ветке `docs` будет размещена вся документация. Это удобно для версионирования, скачивания, коллективного обсуждения.
 
+Используем разметку [Markdown](https://help.github.com/articles/github-flavored-markdown) (можно и HTML, но это добавляет работу с элементами). Для тех, кому нужен редактор, обратите внимание на [http://markdownpad.com/](http://markdownpad.com/).
 
 ## Content
 
-[ТЗ - initial](Requirements/Initial.md)
+- [TR - initial](Requirements/Initial.md)
