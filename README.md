@@ -7,4 +7,4 @@ Learning Games
 
 Документация
 -------------
-Находится в ветке [**docs**](https://github.com/s-stude/LearningGames/tree/docs)
+Находится в ветке [**docs (!!! Absolute URL)**](https://github.com/s-stude/LearningGames/tree/docs)
