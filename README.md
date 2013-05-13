@@ -6,4 +6,4 @@ This repo is for Learning Games project.
 
 ## Content
 
-(Initial requirement)[Requirementss/Initial.md]
+[ТЗ - первые мысли](Requirements/Initial.md)
