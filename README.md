@@ -1,7 +1,10 @@
 Learning Games
 =============
 
-This repo is for Learning Games project.
+Проект по обучающим играм. 
 
-# Документация
+Исходники проекта в ветке `master`.
+
+Документация
+-------------
 Находится в ветке [**docs**](https://github.com/s-stude/LearningGames/tree/docs)
