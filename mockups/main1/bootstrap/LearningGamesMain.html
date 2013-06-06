@@ -15,9 +15,9 @@
     	<!-- Fav and touch icons -->
     	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../bootstrap/ico/apple-touch-icon-144-precomposed.png">
     	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../bootstrap/ico/apple-touch-icon-114-precomposed.png">
-      	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../bootstrap/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="../bootstrap/ico/apple-touch-icon-57-precomposed.png">
-        <link rel="shortcut icon" href="../bootstrap/ico/favicon.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../bootstrap/ico/apple-touch-icon-72-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" href="../bootstrap/ico/apple-touch-icon-57-precomposed.png">
+      <link rel="shortcut icon" href="../bootstrap/img/favicon.png">
 </HEAD>
 
 <BODY>
@@ -25,15 +25,15 @@
   <div class="row-fluid">
     <div class="span2">
       	<!--Left Sidebar content-->
-		<h1 class="muted">Learning Games</h3>
+		    <h1 class="muted">Learning Games</h1>
     </div>
     <div class="span8">
       <!--Body content-->
-		<div class="container-narrow">
+		  <div class="container-narrow">
 
 			<div class="masthead">
-			<p align="center">
-			<ul class="nav nav-pills pull-center">
+			<p>
+			<ul class="nav nav-pills text-center">
 				<li class="active"><a href="#">What is this</a></li>
 				<li><a href="#">How it works</a></li>
 				<li><a href="#">User stories</a></li>
@@ -45,41 +45,63 @@
 			<hr>
 
 			<div class="jumbotron">
-			<div class="span12" align="center">
-				<ul class="thumbnails">
-					<li class="span12">
-						<div class="thumbnail">
-						<img src="http://placehold.it/400x300" alt="" class="img-rounded">
-						<h4 align="center">Movie</h4>
-						</div>
-					</li>
-				</ul>
-				<p></p>
-
-			</div>
 			
-			<h4 align="center">This is how we will make the progress with you</h4>
+			<div id="myCarousel" class="carousel slide">
+				<div class="carousel-inner">
+					<div class="item active">
+						<img src="http://placehold.it/800x300" alt="">
+						<div class="container">
+							<div class="carousel-caption">
+								<h1>Example headline.</h1>
+								<p class="lead">Some text 1</p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img src="http://placehold.it/800x300" alt="">
+						<div class="container">
+							<div class="carousel-caption">
+								<h1>Another example headline.</h1>
+								<p class="lead">Some text 2</p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img src="http://placehold.it/800x300" alt="">
+						<div class="container">
+							<div class="carousel-caption">
+								<h1>One more for good measure.</h1>
+								<p class="lead">Some text 3</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+				<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div><!-- /.carousel -->
+			
+			<h4 class="text-center">This is how we will make the progress with you</h4>
 			<div class="row-fluid marketing">
 				<div class="span12">
 				<ul class="thumbnails">
 					<li class="span4">
 						<div class="thumbnail">
 						<img src="http://placehold.it/150x150" alt="">
-						<h4 align="center">Beginner</h4>
+						<h4 class="text-center">Beginner</h4>
 						</div>
 					</li>
 		
 					<li class="span4">
 						<div class="thumbnail">
 						<img src="http://placehold.it/200x200" alt="">
-						<h4 align="center">Intermediate</h4>
+						<h4 class="text-center">Intermediate</h4>
 						</div>
 					</li>
 
 					<li class="span4">
 						<div class="thumbnail">
 						<img src="http://placehold.it/300x300" alt="">
-						<h4 align="center">Advanced</h4>
+						<h4 class="text-center">Advanced</h4>
 						</div>
 					</li>
 				</ul>
@@ -87,7 +109,7 @@
 				</div>
 			</div>
 
-			<p align="center"><a class="btn btn-large btn-success" href="#">Play your first game RIGHT NOW!</a></p>
+			<p class="text-center"><a class="btn btn-large btn-success" href="#">Play your first game RIGHT NOW!</a></p>
 			</div>
 
       <hr>
@@ -97,7 +119,7 @@
       <div class="footer">
 	<ul class="navbar">
         <div class="navbar-inner">
-                <ul class="nav">
+                <ul class="nav text-center">
                   <li><a href="#">What is this</a></li>
                   <li class="divider-vertical"></li>
                   <li><a href="#">How it works</a></li>
@@ -114,7 +136,7 @@
     </ul>
 	
 
-        <p align="center">&copy; Company 2013</p>
+        <p class="text-center">&copy; Company 2013</p>
       </div>
 
     </div> <!-- /container -->
@@ -122,26 +144,26 @@
     </div>
     <div class="span2">
       <!--Right Sidebar content-->
-		<div class="container">
+		
 
       		<form class="form-signin">
-        	<h4 class="form-signin-heading">Please sign in</h2>
+        	<h4 class="form-signin-heading">Please sign in</h4>
         	<p><input type="text" width="50" class="input-block-level" placeholder="Email address"></p>
-			<p><input type="password" width="50" class="input-block-level" placeholder="Password"></p>
+			    <p><input type="password" width="50" class="input-block-level" placeholder="Password"></p>
         	<label class="checkbox">
           	<input type="checkbox" value="remember-me"> Remember me
         	</label>
         	<button class="btn btn-large btn-primary" type="submit">Sign in</button>
-			<p><a href="#">Forgot password</a></p>
+			     <p><a href="#">Forgot password</a></p>
       		</form>
 
-    	</div> <!-- /container -->
+    	
 		
-		<div class="container">
+		
 				<h4>User stories</h4>
 				<p>Some text...</p>
 				<p><a href="#"><u>More success stories -> </u></a></p>
-		</div> <!-- /container -->
+		
 		
     </div>
   </div>
@@ -150,19 +172,9 @@
 <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../bootstrap/js/jquery.js"></script>
-    <script src="../bootstrap/js/bootstrap-transition.js"></script>
-    <script src="../bootstrap/js/bootstrap-alert.js"></script>
-    <script src="../bootstrap/js/bootstrap-modal.js"></script>
-    <script src="../bootstrap/js/bootstrap-dropdown.js"></script>
-    <script src="../bootstrap/js/bootstrap-scrollspy.js"></script>
-    <script src="../bootstrap/js/bootstrap-tab.js"></script>
-    <script src="../bootstrap/js/bootstrap-tooltip.js"></script>
-    <script src="../bootstrap/js/bootstrap-popover.js"></script>
-    <script src="../bootstrap/js/bootstrap-button.js"></script>
-    <script src="../bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="../bootstrap/js/bootstrap-carousel.js"></script>
-    <script src="../bootstrap/js/bootstrap-typeahead.js"></script>
+    <script src="../bootstrap/js/jquery-2.0.2.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    
 
 </BODY>
 
