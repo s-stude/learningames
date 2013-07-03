@@ -1,0 +1,14 @@
+{
+	"name": "Puzzle game",
+	
+	"version": "0.0.1",
+
+	"dependencies": {
+		"jquery" : "latest",
+		"backbone-amd": "latest",
+		"underscore-amd": "latest",
+		"requirejs": "latest",
+		"requirejs-text": "latest"
+
+	}
+}
