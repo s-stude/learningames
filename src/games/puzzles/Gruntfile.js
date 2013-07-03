@@ -4,91 +4,90 @@ module.exports = function (grunt) {
         pkg:grunt.file.readJSON('package.json'),
 
         vars:{
-            destdir: 'wwwroot',
-            destappjs: 'rapp.js',
-            destlibjs: 'libs.js',
-            destcss: 'style.css'
+            dist:'wwwroot',
+            distjs :'main.js',
+            distcss:'style.css'
         },
 
         jshint:{
-            options: {
-                curly: true,
-                eqeqeq: true,
-                eqnull: true,
-                browser: true,
-                globals: {
-                    jQuery: true
+            options:{
+                curly:true,
+                eqeqeq:true,
+                eqnull:true,
+                browser:true,
+                globals:{
+                    jQuery:true
                 }
             },
 
-            gruntfile: ['Gruntfile.js'],
+            gruntfile:['gruntfile.js'],
 
-            appjs:['assets/js/app/**/*.js', '!assets/js/app/game.js'],
-            apptests: ['assets/js/tests/**/*.js']
-        },
-        
-        karma: {
-            unit: {
-                configFile: 'karma.conf.js',
-                background: true
-            }
+            appjs:['app/scripts/main.js', 'app/scripts/**/*.js', '!app/scripts/vendor/**/*.js']
         },
 
-        concat:{
-            // appjs:{
-            //     src:'<%= jshint.appjs %>',
-            //     dest:'<%= vars.destdir %>/assets/js/<%= vars.destappjs %>'
-            // },
-            // libjs: {
-            //     src: 'assets/js/lib/*.js',
-            //     dest: '<%= vars.destdir %>/assets/js/<%= vars.destlibjs %>'
-            // },
-            css: {
-                src: 'assets/css/**/*.css',
-                dest: '<%= vars.destdir %>/assets/css/<%= vars.destcss %>'
-            }
-        },
+        requirejs:{
+            compile:{
+                options:{
+                    baseUrl:"app/scripts",
+                    mainConfigFile:"app/scripts/main.js",
+                    out: "<%= vars.dist %>/scripts/<%= vars.distjs %>",
+                    name:"main"
 
-        uglify: {
-            appjs: {
-                files: {
-                    '<%= vars.destdir %>/assets/js/<%= vars.destappjs %>': ['<%= jshint.appjs %>']
+//                    appDir:"app",
+//                    baseUrl:"scripts",
+//                    dir:"wwwroot",
+//                    mainConfigFile:"app/scripts/main.js",
+//                    name:"main",
+//                    generateSourceMaps: true
                 }
             }
         },
 
-        cssmin: {
-            combine: {
-                files: {
-                    '<%= vars.destdir %>/assets/css/<%= vars.destcss %>': ['assets/css/*.css']
+        watch:{
+            files:['<%= jshint.gruntfile %>', '<%= jshint.appjs %>', 'app/*.html'],
+            tasks:['default']
+        },
+
+        connect:{
+            dev:{
+                options:{
+                    port:4000,
+                    base:'<%= vars.dist %>'
+                }
+            },
+            release: {
+                options:{
+                    keepalive: true,
+                    port:4000,
+                    base:'<%= vars.dist %>'
                 }
             }
         },
 
         copy:{
-            main:{
+            dev:{
                 files:[
-                    // {src:['assets/css/*'], dest:'<%= vars.destdir %>/'},
-                    {src:['*.html'], dest:'<%= vars.destdir %>/'},
-                    {src:['assets/js/**/*'], dest:'<%= vars.destdir %>/'},
-                    {src:['assets/img/*'], dest:'<%= vars.destdir %>/'}
+                    {
+                        expand:true,
+                        cwd:'app/',
+                        src:['index.html', 'scripts/**', 'css/**', 'fonts/**', 'images/**'],
+                        dest:'<%= vars.dist %>/'
+                    }
+                ]
+            },
+            release: {
+                files:[
+                    {
+                        expand:true,
+                        cwd:'app/',
+                        src:['index.html', 'scripts/vendor/requirejs/require.js'],
+                        dest:'<%= vars.dist %>/'
+                    }
                 ]
             }
         },
 
-        watch:{
-            files:['<%= jshint.gruntfile %>','<%= jshint.appjs %>','<%= jshint.apptests %>', 'assets/css/**/*.css',  'index.html'],
-            tasks:['jshint', 'karma', 'concat', 'copy']
-        },
-
-        connect:{
-            server:{
-                options:{
-                    port:4000,
-                    base:'./<%= vars.destdir %>'
-                }
-            }
-        }
+        clean: ['<%= vars.dist %>']
     });
 
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -99,12 +98,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
-    // Default task.
-    grunt.registerTask('default', ['jshint', 'karma', 'concat', 'copy']);
-    grunt.registerTask('notest', ['jshint', 'concat', 'copy']);
-    grunt.registerTask('test', ['jshint', 'karma']);
-    grunt.registerTask('prod', ['jshint','karma', 'uglify', 'copy', 'cssmin']);
-    grunt.registerTask('live', ['connect', 'watch']);
+    grunt.registerTask('default', ['clean', 'jshint', 'copy:dev']);
+    grunt.registerTask('live-dev', ['default', 'connect:dev', 'watch']);
+
+    grunt.registerTask('release', ['clean', 'jshint', 'copy:release', 'requirejs']);
+    grunt.registerTask('live-release', ['release', 'connect:release']);
+
 
 };
