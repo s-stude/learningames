@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/flat-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/overrides.css">
+
+
+</head>
+<style type="text/css">
+#paper {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    margin-left: -150px;
+    margin-top: -150px;
+    width: 350px;
+    height: 350px;
+    /*border: 1px solid red;*/
+}
+
+.gamewrapper{
+    background: #BDC3C7;
+    position: relative;
+}
+
+.gameholder{
+    background: #ECF0F1;
+    position: relative;
+    top:0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    margin:0 auto;
+}
+
+</style>
+<body>
+    <div id="appview" class="container">
+        <div class="row">
+            <div class="span12">
+                <div id="herounit" class="hero-unit hero-unit-medium text-center">
+                    <h1>Puzzles</h1>  
+                    <p>Some description for game</p>
+                    <p><a id="btnplaygame" class="btn btn-primary btn-large">Play</a></p>
+                </div>
+            </div>
+            <div class="span12">
+                <div class="gamewrapper"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script data-main="scripts/main" src="scripts/vendor/requirejs/require.js"></script>
+
+</body>
+</html>
