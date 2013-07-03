@@ -42,6 +42,19 @@ define('app/cell', function (require) {
                      "stroke-width": 1
                 });
 
+                var text = props.paper.text().attr({
+                    x: props.x + props.cellWidth / 2,
+                    y: props.y + props.cellHeight / 2,
+                    text: "1",
+                    fill: '#27AE60',
+                    'font-size' : 40
+                });
+
+                var st = props.paper.set();
+                st.push(rect, text);
+
+                st.drag(function(dx, dy){console.log(dx,dy);});
+
                 rect.drag(onMove(props.onMove), onStart(props.onStart), onEnd(props.onEnd));
 
                 return {

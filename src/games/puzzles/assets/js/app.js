@@ -6,6 +6,7 @@ requirejs.config({
         'tests': 'tests',
         'jquery':'/assets/js/lib/jquery',
         'underscore' : '/assets/js/lib/underscore',
+        'backbone' : '/assets/js/lib/backbone',
         'raphael': '/assets/js/lib/raphael-min'
     },
     shim : {
@@ -27,4 +28,6 @@ requirejs.onError = function (err) {
     throw err;
 };
 
-requirejs(['app/main']);
+require(['appmain'], function(appmain){
+    appmain.initialize();
+});

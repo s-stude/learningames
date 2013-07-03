@@ -208,11 +208,11 @@ cellDragOnEnd = function (rect) {
     if(isMovedByY){
         if (isVAllowed.top) {
              rect.animate({ y: rect.attr('y') > onDragStartY ? onDragStartY : onDragStartY - rect.attr('height')}, 80, "linear", function () {});
-        };
+        }
 
         if (isVAllowed.bottom) {
             rect.animate({ y:rect.attr('y') > onDragStartY ? onDragStartY + rect.attr('height') : onDragStartY - rect.attr('height')}, 80, "linear", function () {});
-        };
+        }
     }
 
     isHAllowed = {};
