@@ -1,0 +1,44 @@
+.hero-unit-medium {
+    padding: 20px;
+}
+
+.puzzleView {
+    /*background: #ECF0F1;*/
+    /*border-radius: 5px;*/
+}
+
+.puzzleView__paper {
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+    height: 300px;
+    background: #BDC3C7;
+    border-radius: 5px;
+
+}
+
+/*#paper {*/
+/*position: absolute;*/
+/*top: 50%;*/
+/*left:50%;*/
+/*margin-left: -150px;*/
+/*margin-top: -150px;*/
+/*width: 350px;*/
+/*height: 350px;*/
+/*border: 1px solid red;*/
+/*}*/
+
+/*.gamewrapper{*/
+/*background: #BDC3C7;*/
+/*position: relative;*/
+/*}*/
+
+/*.gameholder{*/
+/*background: #ECF0F1;*/
+/*position: relative;*/
+/*top:0;*/
+/*left: 0;*/
+/*width: 600px;*/
+/*height: 600px;*/
+/*margin:0 auto;*/
+/*}*/
