@@ -1,87 +1,114 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
-        pkg:grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON('package.json'),
 
-        vars:{
-            dist:'wwwroot',
-            distjs :'main.js',
-            distcss:'style.css'
+        vars: {
+            dist   : 'wwwroot',
+            distjs : 'main.js',
+            distcss: 'style.css'
         },
 
-        jshint:{
-            options:{
-                curly:true,
-                eqeqeq:true,
-                eqnull:true,
-                browser:true,
-                globals:{
-                    jQuery:true
+        jshint: {
+            options: {
+                curly  : true,
+                eqeqeq : true,
+                eqnull : true,
+                browser: true,
+                globals: {
+                    jQuery: true
                 }
             },
 
-            gruntfile:['gruntfile.js'],
 
-            appjs:['app/scripts/main.js', 'app/scripts/**/*.js', '!app/scripts/vendor/**/*.js']
+            gruntfile: ['gruntfile.js'],
+
+            appjs: ['app/scripts/main.js', 'app/scripts/**/*.js', '!app/scripts/vendor/**/*.js']
         },
 
-        requirejs:{
-            compile:{
-                options:{
-                    baseUrl:"app/scripts",
-                    mainConfigFile:"app/scripts/main.js",
-                    out: "<%= vars.dist %>/scripts/<%= vars.distjs %>",
-                    name:"main"
-
-//                    appDir:"app",
-//                    baseUrl:"scripts",
-//                    dir:"wwwroot",
-//                    mainConfigFile:"app/scripts/main.js",
-//                    name:"main",
-//                    generateSourceMaps: true
-                }
-            }
-        },
-
-        watch:{
-            files:['<%= jshint.gruntfile %>', '<%= jshint.appjs %>', 'app/*.html'],
-            tasks:['default']
-        },
-
-        connect:{
-            dev:{
-                options:{
-                    port:4000,
-                    base:'<%= vars.dist %>'
+        requirejs: {
+            dev    : {
+                options: {
+                    baseUrl       : "app/scripts",
+                    mainConfigFile: "app/scripts/main.js",
+                    //out           : "<%= vars.dist %>/scripts/<%= vars.distjs %>",
+                    name          : "main",
+                    dir           : '<%= vars.dist %>/scripts/',
+                    optimize      : "uglify2",
+                    uglify2       : {
+                        output: {
+                            beautify: true
+                        }
+                    }
                 }
             },
             release: {
-                options:{
+                options: {
+                    baseUrl       : "app/scripts",
+                    mainConfigFile: "app/scripts/main.js",
+                    //out           : "<%= vars.dist %>/scripts/<%= vars.distjs %>",
+                    name          : "main",
+
+                    dir                    : '<%= vars.dist %>/scripts/',
+                    preserveLicenseComments: false,
+                    optimize               : "uglify2",
+                    generateSourceMaps     : true
+//                    modules: [
+//                        {
+//                            name   : "main",
+//                            include: [ "text" ]
+//                        }
+//                    ]
+                }
+
+            }
+        },
+
+        watch: {
+            files: ['<%= jshint.gruntfile %>', '<%= jshint.appjs %>', 'app/*.html'],
+            tasks: ['default']
+        },
+
+        connect: {
+            dev    : {
+                options: {
+                    port: 4000,
+                    base: '<%= vars.dist %>'
+                }
+            },
+            release: {
+                options: {
                     keepalive: true,
-                    port:4000,
-                    base:'<%= vars.dist %>'
+                    port     : 4000,
+                    base     : '<%= vars.dist %>'
                 }
             }
         },
 
-        copy:{
-            dev:{
-                files:[
+        copy: {
+            dev    : {
+                files: [
                     {
-                        expand:true,
-                        cwd:'app/',
-                        src:['index.html', 'scripts/**', 'css/**', 'fonts/**', 'images/**'],
-                        dest:'<%= vars.dist %>/'
+                        expand: true,
+                        cwd   : 'app/',
+                        src   : ['index.html', 'scripts/**', 'css/**', 'fonts/**', 'images/**'],
+                        dest  : '<%= vars.dist %>/'
+                    },
+                    {
+                        expand : true,
+                        flatten: true,
+                        cwd    : 'app/',
+                        src    : 'scripts/vendor/requirejs-text/text.js', dest: '<%= vars.dist %>/scripts'
                     }
                 ]
             },
             release: {
-                files:[
+                files: [
                     {
-                        expand:true,
-                        cwd:'app/',
-                        src:['index.html', 'scripts/vendor/requirejs/require.js'],
-                        dest:'<%= vars.dist %>/'
+                        expand: true,
+                        cwd   : 'app/',
+                        src   : ['index.html', 'scripts/vendor/requirejs/require.js'],
+                        dest  : '<%= vars.dist %>/'
                     }
                 ]
             }
