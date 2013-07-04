@@ -2,7 +2,8 @@ require.config({
 	paths: {
 		'jquery' : 'vendor/jquery/jquery',
 		'underscore' : 'vendor/underscore-amd/underscore',
-		'backbone' : 'vendor/backbone-amd/backbone'
+		'backbone' : 'vendor/backbone-amd/backbone',
+		'text' : 'vendor/requirejs-text/text'
 	}
 });
 
@@ -15,10 +16,8 @@ requirejs.onError = function (err) {
     throw err;
 };
 
-require(['jquery', 'views/app'], function($, AppView){
+require(['jquery', 'text', 'views/app'], function($, text, AppView){
 
-	new AppView({
-		el: $('#appview')
-	});
+	new AppView();
 
 });

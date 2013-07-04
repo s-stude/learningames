@@ -1,15 +1,27 @@
 define([
 
-	'jquery', 
-	'underscore', 
-	'backbone'
+    'jquery',
+    'underscore',
+    'backbone',
+    'views/puzzleView'
 
-	], function ($, _, Backbone) {
-		var AppView = Backbone.View.extend({
-			initialize: function(){
-				console.log('AppView initialized');
-			}
-		});
+], function ($, _, Backbone, PuzzleView) {
 
-		return AppView;
-	});
+    var AppView = Backbone.View.extend({
+        el:'#appview',
+
+        initialize:function () {
+            console.log('AppView initialized');
+        },
+
+        events:{
+            "click #btnplaygame":"loadGame"
+        },
+
+        loadGame:function () {
+            new PuzzleView();
+        }
+    });
+
+    return AppView;
+});
