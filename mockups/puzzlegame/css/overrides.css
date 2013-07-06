@@ -1,13 +1,16 @@
 .hero-unit-medium {
     padding: 20px;
 }
-
-.puzzleView {
+.puzzle-view
+{
+    margin-top: 30px;
+}
+.puzzle-view {
     /*background: #ECF0F1;*/
     /*border-radius: 5px;*/
 }
 
-.puzzleView__paper {
+.puzzle-view__paper {
     position: relative;
     margin: 0 auto;
     width: 300px;
