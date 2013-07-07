@@ -1,26 +1,37 @@
 define([
 
-    'jquery',
     'underscore',
     'backbone',
+    'models/desk',
     'text!templates/puzzleView.html'
 
-], function (
+], function (_, Backbone, Desk, puzzleViewTemplate) {
 
-    $,
-    _,
-    Backbone,
-    puzzleViewTemplate
+    console.log(Desk);
 
-    ) {
     var PuzzleView = Backbone.View.extend({
-        el: '#puzzleViewContainer',
+        el:'#puzzle-view',
 
-        initialize: function(){
+        initialize:function () {
             this.render();
         },
 
-        render: function(){
+        events:{
+            'click #btnstartgame':'startGame'
+        },
+
+        startGame:function () {
+            Desk.init({
+                holder: 'puzzle-view__paper',
+                width: 300,
+                height: 300,
+                rows: 3,
+                cols: 3
+            });
+        },
+
+        render:function () {
+            console.log('PuzzleView.render was fired.');
             this.$el.append(puzzleViewTemplate);
         }
 

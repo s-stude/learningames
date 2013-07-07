@@ -3,6 +3,7 @@ require.config({
 		'jquery' : 'vendor/jquery/jquery',
 		'underscore' : 'vendor/underscore-amd/underscore',
 		'backbone' : 'vendor/backbone-amd/backbone',
+		'raphael' : 'vendor/raphael-tmp/raphael',
 		'text' : 'vendor/requirejs-text/text'
 	}
 });
@@ -16,8 +17,8 @@ requirejs.onError = function (err) {
     throw err;
 };
 
-require(['jquery', 'text', 'views/app'], function($, text, AppView){
+require(['jquery', 'text', 'views/puzzleView'], function($, text, PuzzleView){
 
-	new AppView();
+	new PuzzleView();
 
 });
