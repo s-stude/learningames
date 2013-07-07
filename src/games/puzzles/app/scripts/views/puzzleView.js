@@ -28,6 +28,9 @@ define([
                 rows: 3,
                 cols: 3
             });
+
+            this.$('#btnstartgame').addClass('hide');
+            this.$('#btnresetgame').removeClass('hide');
         },
 
         render:function () {
