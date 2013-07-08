@@ -25,16 +25,16 @@ define([
                     cellHeight = overrides.height / overrides.rows,
 
                     computed = {
-                        holder:overrides.holder,
+                        holder: overrides.holder,
 
-                        width:overrides.width,
-                        height:overrides.height,
+                        width : overrides.width,
+                        height: overrides.height,
 
-                        rows:overrides.rows,
-                        cols:overrides.cols,
+                        rows: overrides.rows,
+                        cols: overrides.cols,
 
-                        cellWidth:cellWidth,
-                        cellHeight:cellHeight
+                        cellWidth : cellWidth,
+                        cellHeight: cellHeight
                     };
 
                 for (var p in computed) {
@@ -66,24 +66,22 @@ define([
                 var cellsInRow, coords = [];
 
                 cellsInRow = _.filter(props.cells, function (icell) {
-                    return icell.rect.attr('y') === rect.attr('y'); // && icell.rect.attr('x') !== rect.attr('x');
+                    return icell.rect.attr('y') === rect.attr('y');
                 });
 
                 coords.push({
-                    direction:'left',
-                    x:getExtremeX(onDragStartX - rect.attr('width'))
-                    //, x2:onDragStartX
+                    direction: 'left',
+                    x        : getExtremeX(onDragStartX - rect.attr('width'))
                 });
 
                 coords.push({
-                    direction:'right',
-                    x:getExtremeX(onDragStartX + rect.attr('width'))
-                    //, x2:getExtremeX(onDragStartX + rect.attr('width') * 2)
+                    direction: 'right',
+                    x        : getExtremeX(onDragStartX + rect.attr('width'))
                 });
 
                 _.each(coords, function (coord) {
                     var overlappedCell = _.find(cellsInRow, function (icell) {
-                        return icell.rect.attr('x') === coord.x; //&& icell.rect.attr('x') + icell.rect.attr('width') === coord.x2;
+                        return icell.rect.attr('x') === coord.x;
                     });
 
                     isHAllowed[coord.direction] = overlappedCell === undefined;
@@ -93,24 +91,22 @@ define([
                 var cellsInColumn, coords = [];
 
                 cellsInColumn = _.filter(props.cells, function (icell) {
-                    return icell.rect.attr('x') === rect.attr('x'); // && icell.rect.attr('y') !== rect.attr('y');
+                    return icell.rect.attr('x') === rect.attr('x');
                 });
 
                 coords.push({
-                    direction:'top',
-                    y:getExtremeY(onDragStartY - rect.attr('height'))
-                    // ,  y2:onDragStartY
+                    direction: 'top',
+                    y        : getExtremeY(onDragStartY - rect.attr('height'))
                 });
 
                 coords.push({
-                    direction:'bottom',
-                    y:getExtremeY(onDragStartY + rect.attr('height'))
-                    // , y2:getExtremeY(onDragStartY + rect.attr('height') * 2)
+                    direction: 'bottom',
+                    y        : getExtremeY(onDragStartY + rect.attr('height'))
                 });
 
                 _.each(coords, function (coord) {
                     var overlappedCell = _.find(cellsInColumn, function (icell) {
-                        return icell.rect.attr('y') === coord.y; // && icell.rect.attr('y') + icell.rect.attr('height') === coord.y2;
+                        return icell.rect.attr('y') === coord.y;
                     });
 
                     isVAllowed[coord.direction] = overlappedCell === undefined;
@@ -141,7 +137,6 @@ define([
                     dx = dx > 0 ? rect.attr('width') : rect.attr('width') * -1;
                 }
 
-                //
                 if (Math.abs(dy) > rect.attr('height')) {
                     dy = dy > 0 ? rect.attr('height') : rect.attr('height') * -1;
                 }
@@ -204,24 +199,24 @@ define([
 
                 if (isMovedByX) {
                     if (isHAllowed.left) {
-                        rect.animate({ x:rect.attr('x') > onDragStartX ? onDragStartX + rect.attr('width') : onDragStartX - rect.attr('width')}, 80, "linear", function () {
+                        rect.animate({ x: rect.attr('x') > onDragStartX ? onDragStartX + rect.attr('width') : onDragStartX - rect.attr('width')}, 80, "linear", function () {
                         });
                     }
 
                     if (isHAllowed.right) {
-                        rect.animate({ x:rect.attr('x') > onDragStartX ? onDragStartX + rect.attr('width') : onDragStartX - rect.attr('width')}, 80, "linear", function () {
+                        rect.animate({ x: rect.attr('x') > onDragStartX ? onDragStartX + rect.attr('width') : onDragStartX - rect.attr('width')}, 80, "linear", function () {
                         });
                     }
                 }
 
                 if (isMovedByY) {
                     if (isVAllowed.top) {
-                        rect.animate({ y:rect.attr('y') > onDragStartY ? onDragStartY : onDragStartY - rect.attr('height')}, 80, "linear", function () {
+                        rect.animate({ y: rect.attr('y') > onDragStartY ? onDragStartY : onDragStartY - rect.attr('height')}, 80, "linear", function () {
                         });
                     }
 
                     if (isVAllowed.bottom) {
-                        rect.animate({ y:rect.attr('y') > onDragStartY ? onDragStartY + rect.attr('height') : onDragStartY - rect.attr('height')}, 80, "linear", function () {
+                        rect.animate({ y: rect.attr('y') > onDragStartY ? onDragStartY + rect.attr('height') : onDragStartY - rect.attr('height')}, 80, "linear", function () {
                         });
                     }
                 }
@@ -236,7 +231,6 @@ define([
 
             initCells = function () {
                 var
-                    rect,
                     cells = [],
 
                     columnCount = 0,
@@ -251,14 +245,14 @@ define([
                     y = rowCount * get('cellHeight');
 
                     var c = cell.create({
-                        paper:get('paper'),
-                        x:x,
-                        y:y,
-                        cellWidth:get('cellWidth'),
-                        cellHeight:get('cellHeight'),
-                        onStart:cellDragOnStart,
-                        onMove:cellDragOnMove,
-                        onEnd:cellDragOnEnd
+                        paper     : get('paper'),
+                        x         : x,
+                        y         : y,
+                        cellWidth : get('cellWidth'),
+                        cellHeight: get('cellHeight'),
+                        onStart   : cellDragOnStart,
+                        onMove    : cellDragOnMove,
+                        onEnd     : cellDragOnEnd
                     });
 
                     cells.push(c);
@@ -274,6 +268,7 @@ define([
 
                 props.cells = cells;
             },
+
             init = function (overrides) {
                 initProps(overrides);
 
@@ -282,11 +277,21 @@ define([
                 props.paper = Raphael(get('holder'), get('width'), get('height'));
 
                 initCells();
+            },
+
+            reset = function () {
+                _.each(props.cells, function(icell){
+                    icell.rect.remove();
+                });
+
+                props.cells = [];
+                initCells();
             };
 
         return {
-            init:init,
-            get:get
+            init : init,
+            reset: reset,
+            get  : get
         };
     })();
 });
