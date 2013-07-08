@@ -17,8 +17,8 @@ requirejs.onError = function (err) {
     throw err;
 };
 
-require(['jquery', 'text', 'views/puzzleView'], function($, text, PuzzleView){
+require(['views/appView'], function(AppView){
 
-	new PuzzleView();
+	new AppView();
 
 });
