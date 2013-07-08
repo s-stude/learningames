@@ -17,7 +17,9 @@ define([
         },
 
         events:{
-            'click #btnstartgame':'startGame'
+            'click #btnstartgame':'startGame',
+            'click #btn-reset-game':'resetGame',
+            'click #btn-show-hint' : 'showGameHint'
         },
 
         startGame:function () {
@@ -33,9 +35,17 @@ define([
             this.$('#btnresetgame').removeClass('hide');
         },
 
+        resetGame: function(){
+            Desk.reset();
+        },
+
+        showGameHint: function(){
+            console.log('btn-show-hint');
+        },
+
         render:function () {
-            console.log('PuzzleView.render was fired.');
             this.$el.append(puzzleViewTemplate);
+            console.log('PuzzleView.render');
         }
 
     });
