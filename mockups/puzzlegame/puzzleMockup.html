@@ -12,17 +12,19 @@
         <div id="appview" class="container">
 
             <div class="row">
-                <div class="span12">
+                <div class="span10 offset1">
                     <div id="herounit" class="hero-unit hero-unit-medium text-center">
                         <h1>Puzzles</h1>
 
                         <p>Some description for game</p>
+
+                        <p><a id="btn-start-game" class="btn btn-primary" href="#">Play this game</a></p>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="span12">
+                <div class="span10 offset1">
                     <h3>Rules</h3>
 
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
@@ -40,24 +42,20 @@
                 </div>
             </div>
 
-            <div id="puzzle-view" class="puzzle-view">
+            <div id="puzzle-view">
                 <div class="row">
-                    <div class="span9">
+                    <div class="span2 offset1">
+                        <button id="btn-reset-game" class="btn btn-warning btn-block">Reset</button>
+                        <button id="btn-show-hint" class="btn btn-info btn-block">Hint</button>
+                    </div>
+                    <div class="span8 text-right">
                         <div id="puzzle-view__paper">
 
                         </div>
                     </div>
-                    <div class="span3">
-                        <p>
-                            <button class="btn btn-primary span2">Start</button>
-                            <button class="btn btn-warning span2">Reset</button>
-                        </p>
-                        <p>
-                            <button class="btn btn-info span2">Hint</button>
-                        </p>
-                    </div>
                 </div>
             </div>
+
         </div>
 
         <script data-main="scripts/main" src="scripts/vendor/requirejs/require.js"></script>

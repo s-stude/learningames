@@ -6,16 +6,12 @@
     margin: 20px 0;
 }
 
-.puzzle-view {
-    /*background: #ECF0F1;*/
-    /*border-radius: 5px;*/
-}
-
 #puzzle-view__paper {
     position: relative;
-    margin: 0 auto;
-    width: 300px;
-    height: 300px;
+    /*margin: 0 auto;*/
+    display: inline-block;
+    width: 600px;
+    height: 600px;
     background: #BDC3C7;
     border-radius: 5px;
 }
