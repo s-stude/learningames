@@ -5,7 +5,10 @@ require.config({
 		'backbone' : 'vendor/backbone-amd/backbone',
 		'raphael' : 'vendor/raphael-tmp/raphael',
 		'text' : 'vendor/requirejs-text/text'
-	}
+	},
+    packages: [
+        'puzzles'
+    ]
 });
 
 requirejs.onError = function (err) {
@@ -17,8 +20,4 @@ requirejs.onError = function (err) {
     throw err;
 };
 
-require(['views/appView'], function(AppView){
-
-	new AppView();
-
-});
+require(['routes']);

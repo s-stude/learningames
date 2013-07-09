@@ -1,9 +1,9 @@
 define([
 
-    'jquery',
+    '.',
     'underscore',
     'raphael',
-    'models/cell'
+    'puzzles/cell'
 
 ], function ($, _, Raphael, cell) {
 

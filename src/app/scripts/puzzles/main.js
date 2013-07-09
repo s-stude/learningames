@@ -2,7 +2,7 @@ define([
 
     'underscore',
     'backbone',
-    'views/puzzleView'
+    'puzzles/puzzleView'
 
 ], function (_, Backbone, PuzzleView) {
 

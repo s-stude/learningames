@@ -2,8 +2,8 @@ define([
 
     'underscore',
     'backbone',
-    'models/desk',
-    'text!templates/puzzleView.html'
+    'puzzles/desk',
+    'text!puzzles/templates/puzzleView.html'
 
 ], function (_, Backbone, Desk, puzzleViewTemplate) {
 
