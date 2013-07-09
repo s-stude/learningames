@@ -7,7 +7,8 @@ require.config({
 		'text' : 'vendor/requirejs-text/text'
 	},
     packages: [
-        'puzzles'
+        'puzzles',
+        'circles'
     ]
 });
 

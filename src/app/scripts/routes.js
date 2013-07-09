@@ -1,22 +1,31 @@
 define([
 
     'backbone',
-    'puzzles'
+    'puzzles',
+    'circles'
 
 ], function(
 
     Backbone,
-    Puzzles
+    Puzzles,
+    Circles
 
     ){
 
     var Router = Backbone.Router.extend({
         routes: {
-            'puzzle-game' : 'loadPuzzles'
+            'puzzle-game' : 'loadPuzzles',
+            'circles-game' : 'loadCircles'
+
         },
 
         loadPuzzles: function(){
             new Puzzles();
+        },
+
+        loadCircles: function()
+        {
+
         }
     });
 
