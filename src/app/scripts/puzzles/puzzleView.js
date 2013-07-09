@@ -14,6 +14,14 @@ define([
 
         initialize:function () {
             this.render();
+
+            Desk.init({
+                holder: 'puzzle-view__paper',
+                width: 600,
+                height: 600,
+                rows: 3,
+                cols: 3
+            });
         },
 
         events:{
@@ -23,13 +31,7 @@ define([
         },
 
         startGame:function () {
-            Desk.init({
-                holder: 'puzzle-view__paper',
-                width: 300,
-                height: 300,
-                rows: 3,
-                cols: 3
-            });
+
 
             this.$('#btnstartgame').addClass('hide');
             this.$('#btnresetgame').removeClass('hide');

@@ -272,7 +272,7 @@ define([
             init = function (overrides) {
                 initProps(overrides);
 
-                var $holder = $('#' + get('holder'));
+//                var $holder = $('#' + get('holder'));
 //                props.paper = Raphael(0, 0, get('width'), get('height'));
                 props.paper = Raphael(get('holder'), get('width'), get('height'));
 
