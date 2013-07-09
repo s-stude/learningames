@@ -7,7 +7,7 @@ define([
 
 ], function (_, Backbone, Desk, puzzleViewTemplate) {
 
-    console.log(Desk);
+    // console.log(Desk);
 
     var PuzzleView = Backbone.View.extend({
         el:'#puzzle-view',

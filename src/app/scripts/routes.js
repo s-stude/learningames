@@ -1,14 +1,14 @@
 define([
 
     'backbone',
-    'puzzles',
-    'circles'
+    'puzzles'
+    // 'circles'
 
 ], function(
 
     Backbone,
-    Puzzles,
-    Circles
+    Puzzles
+    // Circles
 
     ){
 
