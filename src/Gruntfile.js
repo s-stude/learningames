@@ -68,7 +68,7 @@ module.exports = function (grunt) {
                 tasks: ['copy:appcss']
             },
             apptemplates: {
-                files: ['app/index.html', 'app/scripts/**/*.html'],
+                files: ['app/*.html', 'app/scripts/**/*.html'],
                 tasks: ['copy:apptemplates']
             }
         },
@@ -112,7 +112,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd   : 'app/',
-                        src   : ['index.html', 'scripts/**/*.html'],
+                        src   : ['*.html', 'scripts/**/*.html'],
                         dest  : '<%= vars.dist %>/'
                     }
                 ]
@@ -123,7 +123,7 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         cwd   : 'app/',
-                        src   : ['index.html', 'scripts/vendor/requirejs/require.js'],
+                        src   : ['*.html', 'scripts/vendor/requirejs/require.js'],
                         dest  : '<%= vars.dist %>/'
                     }
                 ]
