@@ -112,7 +112,7 @@ define([
 
 			$('#value').focus();
 
-			createSet();
+			//createSet();
 
 			var interval = setInterval(createSet, time);
 
@@ -392,6 +392,7 @@ define([
 
 		render:function () {
             this.$el.append(circleViewTemplate);
+             this.$el.addClass('animated fadeInDownBig');
             console.log('CircleView.render');
         }
 		
