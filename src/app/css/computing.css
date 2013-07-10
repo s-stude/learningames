@@ -1,12 +1,12 @@
-#paper
+/* #paper
 {
 	width: auto;
 	height: 500px;
 	border-radius: 6px;
 	background-color: whitesmoke;
-	/*background-image: url(../images/backgroung2.jpg);*/
+	background-image: url(../images/backgroung2.jpg);
 }
-
+ */
 #paper.error
 {
 	/*border: 1px solid red;*/
