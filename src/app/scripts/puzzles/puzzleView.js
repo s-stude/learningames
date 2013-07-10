@@ -47,6 +47,7 @@ define([
 
         render:function () {
             this.$el.append(puzzleViewTemplate);
+            this.$el.addClass('animated fadeInUp');
             console.log('PuzzleView.render');
         }
 
