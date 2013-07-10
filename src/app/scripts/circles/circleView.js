@@ -16,7 +16,7 @@ define([
 
 		initialize: function() {
 
-			 this.render();
+			this.render();
 
 			var width = $('#paper').width();
 
