@@ -4,9 +4,11 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         vars: {
-            dist   : 'wwwroot',
-            distjs : 'main.js',
-            distcss: 'style.css'
+            dist         : 'wwwroot',
+            distjs       : 'main.js',
+            distcss      : 'styles.css',
+            distvendorcss: 'vendor.css',
+            distappcss   : 'app.css'
         },
 
         jshint: {
@@ -25,7 +27,27 @@ module.exports = function (grunt) {
             appjs: ['app/scripts/main.js', 'app/scripts/**/*.js', '!app/scripts/vendor/**/*.js']
         },
 
+        cssmin: {
+            appcss : {
+                files: {
+                    '<%= vars.dist %>/css/<%= vars.distappcss %>': ['app/scripts/**/*.css', '!app/scripts/vendor/**/*.css' ]
+                }
+            },
+            distcss: {
+                files: { '<%= vars.dist %>/css/<%= vars.distcss %>': ['<%= vars.dist %>/css/<%= vars.distvendorcss %>', '<%= vars.dist %>/css/<%= vars.distappcss %>']}
+            }
+        },
+
         requirejs: {
+            appcss : {
+                options: {
+                    optimizeCss    : 'standard.keepLines',
+                    cssImportIgnore: null,
+                    cssIn          : 'app/css/<%= vars.distvendorcss %>',
+                    out            : '<%= vars.dist %>/css/<%= vars.distvendorcss %>'
+
+                }
+            },
             dev    : {
                 options: {
                     baseUrl       : "app/scripts",
@@ -64,8 +86,8 @@ module.exports = function (grunt) {
                 tasks: ['copy:vendorjs']
             },
             appcss      : {
-                files: ['app/css/**/*.css'],
-                tasks: ['copy:appcss']
+                files: ['app/css/includes.css', 'app/scripts/**/*.css', '!app/scripts/vendor/**/*.css'],
+                tasks: ['requirejs:appcss', 'cssmin:appcss', 'cssmin:distcss']
             },
             apptemplates: {
                 files: ['app/*.html', 'app/scripts/**/*.html'],
@@ -91,17 +113,6 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd   : 'app/',
                         src   : ['scripts/vendor/**'],
-                        dest  : '<%= vars.dist %>/'
-                    }
-                ]
-            },
-
-            appcss: {
-                files: [
-                    {
-                        expand: true,
-                        cwd   : 'app/',
-                        src   : ['css/**'],
                         dest  : '<%= vars.dist %>/'
                     }
                 ]
@@ -161,11 +172,49 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
-    grunt.registerTask('default', ['clean', 'jshint', 'copy:appjs', 'copy:vendorjs', 'copy:appcss', 'copy:apptemplates']);
+    grunt.registerTask(
+
+        'default',
+
+        [
+            'clean',
+            'jshint',
+            'copy:appjs',
+            'copy:vendorjs',
+            'requirejs:appcss',
+            'cssmin:appcss',
+            'cssmin:distcss',
+            'copy:apptemplates'
+        ]);
+
     grunt.registerTask('live-dev', ['default', 'connect:dev', 'watch']);
+
 
     grunt.registerTask('release', ['clean', 'jshint', 'copy:release', 'requirejs']);
     grunt.registerTask('live-release', ['release', 'connect:release']);
 
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
