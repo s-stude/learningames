@@ -1,0 +1,89 @@
+<!DOCTYPE html -->
+<html lang="en">
+<head>
+  <title>Learning Games</title>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/flat-ui.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+  <link href="images/icons/favicon.png" rel="shortcut icon" >
+</head>
+<body>
+  <header style="background-color:rgba(255,255,255,0.95);padding-bottom:32px;position:fixed;right:0;left:0;">
+
+    <div class="container" style="padding-top:20px">
+      <div class="row">
+        <div class="span8">
+          <a href="">
+            <img src="images/icons/Retina-Ready@1x.png"></a>
+          <a style="padding-left:10px;" href="">how it works</a>
+          <a style="padding-left:10px;" href="">user stories</a>
+        </div>
+        
+      </div>
+
+    </div>
+
+  </header>
+<div style="background-color: #eeefe1;">
+  <div style="height: 124px; background-color: white;"></div>
+  <div class="container" style="padding-top:50px">
+    <div class="row" style="padding-bottom:20px;">
+      <div class="span12" style="text-align:center;padding-bottom:50px;padding-top:25px;">
+        <h1>Hello! We need to identify you!</h1>
+      </div>
+      <div id="login" class="span6" style="text-align:center;padding-bottom:50px;paddint-top:25px;">
+        <div class="tile" style="border: 2px solid #2980B9">
+        <h3><img width="40" height="40" src="images/icons/open.png">    Please, sign in </img></h3>
+        <form method="POST" action=".">
+          <input type="hidden" value="PGSREGabysvwG1A4bl7ISuFcLKheSTwL" name="csrfmiddlewaretoken"></input>
+          <label for="id_email">Email:</label><input id="id_email" type="text" placeholder="Email" name="email" maxlength="75"></input>
+          <label for="id_password">Password:</label><input id="id_password" type="password" placeholder="Password" name="password"></input>
+          <label class="checkbox"><input type="checkbox" value="remember-me"></input>Remember me</label>
+          <input class="btn btn-primary" type="submit" value="Sign in"></input>
+          <p><a class="forgot" style="font-size:14px; padding:15px 0; color:#999; display:inline-block" href="/accounts/password/reset/">Forgot password?</a></p>
+        </form>
+      </div>
+      </div>
+      <div id="register" class="span6" style="text-align:center;padding-bottom:50px;paddint-top:25px;">
+        <div class="tile" style="border: 2px solid #2980B9">
+        <h3>Or create new account</h3>
+          <form method="POST" action=".">
+          <input type="hidden" value="PGSREGabysvwG1A4bl7ISuFcLKheSTwL" name="csrfmiddlewaretoken"></input>
+          <label for="id_email">Login:</label><input id="id_login" type="text" placeholder="Login" name="login" maxlength="75"></input>
+          <label for="id_email">Email:</label><input id="id_email" type="text" placeholder="Email" name="email" maxlength="75"></input>
+          <label for="id_password">Password:</label><input id="id_password" type="password" placeholder="Password" name="password"></input>
+          <p><input class="btn btn-primary" type="submit" value="Sign up"></input></p>
+          </form>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div style="background-color:white;">
+    <div class="container" style="padding-top:30px;padding-bottom:30px;">
+      <div class="row">
+        <div class="span10">
+
+          <a class="footer-link" href="">about us</a>
+          <a class="footer-link" href="">user stories</a>
+          <a class="footer-link" href="">how it works</a>
+        </div>
+        <div class="span2">
+          <a class="footer-icon-facebook" href="http://facebook.com"></a>
+          <a class="footer-icon-twitter" href="http://twitter.com"></a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</footer>
+<script src="js/jquery-2.0.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -43,3 +43,11 @@
 {
 	background-image: url(../images/icons/twitter30hover.png);
 }
+.checkbox
+{
+	min-height: 20px;
+    padding-left: 20px;
+    padding-left-value: 20px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+}
