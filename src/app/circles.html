@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title></title>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/flat-ui.css">
-        <link rel="stylesheet" type="text/css" href="css/overrides.css">
-    </head>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/flat-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/overrides.css"></head>
 
-    <body>
-        <div id="app-view" class="container">
+<body>
+    <div id="app-view" class="container">
 
-            <div class="row">
-                <div class="span10 offset1">
-                    <div id="herounit" class="hero-unit hero-unit-medium text-center">
-                        <h1>Circles</h1>
+        <div class="row">
+            <div class="span12">
+                <div id="herounit" class="hero-unit hero-unit-medium text-center">
+                    <h1>Circles</h1>
 
-                        <p>Some description for game</p>
+                    <p>Some description for game</p>
 
-                        <p><button id="btn-load-game" class="btn btn-primary">Play this game</button></p>
-                    </div>
+                    <p>
+                        <button id="btn-load-game" class="btn btn-primary">Play this game</button>
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="span10 offset1">
-                    <h3>Rules</h3>
+        <div class="row">
+            <div class="span12">
+                <h3>Rules</h3>
 
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                         been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a
                         galley
@@ -38,22 +40,17 @@
                         passages,
                         and more recently with desktop publishing software like Aldus PageMaker including versions
                         of
-                        Lorem Ipsum.</p>
-                </div>
-            </div>
-<div id="circle-view">
-           <div id="paper" style="backg1round-color: #ECF0F1;"></div>
-            <div class="span12 row" style="padding-top: 20px;">
-        
-            <input style="height: 45px; margin-bottom: 0" type="text" id="value" placeholder="type in result">
-            <button class="btn btn-large btn-primary" id="enter">check</button>
-            </div>
-
+                        Lorem Ipsum.
+                </p>
             </div>
         </div>
-      
-      
 
-        <script data-main="scripts/main" src="scripts/vendor/requirejs/require.js"></script>
-    </body>
+        <div id="paper">
+            
+        </div>
+
+    </div>
+
+    <script data-main="scripts/main" src="scripts/vendor/requirejs/require.js"></script>
+</body>
 </html>
