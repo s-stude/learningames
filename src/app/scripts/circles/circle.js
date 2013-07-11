@@ -40,7 +40,7 @@ define(function() {
                 }, 5000, "bounce", function() {
                     this.remove();
                 });
-            }
+            };
 
         circleAnimate = function() {
 
