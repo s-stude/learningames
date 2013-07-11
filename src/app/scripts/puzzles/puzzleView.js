@@ -7,8 +7,6 @@ define([
 
 ], function (_, Backbone, Desk, puzzleViewTemplate) {
 
-    // console.log(Desk);
-
     var PuzzleView = Backbone.View.extend({
         el:'#puzzle-view',
 
@@ -17,10 +15,11 @@ define([
 
             Desk.init({
                 holder: 'puzzle-view__paper',
-                width: 600,
-                height: 600,
                 rows: 3,
-                cols: 3
+                cols: 3,
+                cellWidth : 100,
+                cellHeight : 100,
+                cellPadding: 5
             });
         },
 

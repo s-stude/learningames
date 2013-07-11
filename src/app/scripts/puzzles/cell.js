@@ -36,10 +36,10 @@ define(function () {
                     width:props.cellWidth,
                     height:props.cellHeight,
                     fill: '#2ECC71', //randomColor,
-                    'fill-opacity':1,
+                    'fill-opacity':0.1,
                     stroke: '#27AE60',//randomColor,
                     'stroke-opacity':1,
-                     "stroke-width": 1
+                     "stroke-width": 4
                 });
 
 //                var text = props.paper.text().attr({
