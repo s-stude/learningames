@@ -1,8 +1,8 @@
 define([
 
 	'jquery',
-		'underscore',
-		'raphael'
+	'underscore',
+	'raphael'
 
 
 ], function($, _, Raphael) {
@@ -13,40 +13,28 @@ define([
 			paper,
 			interval,
 			time = 4000,
-			rect,
-			text,
-			count = 0,
+			correctCount = 0,
 			countCheck = 5,
-			bonusX,
 			points = 0,
-			counts = 0,
-			success = 0,
 			fail = 0,
-			lineLeft,
-			pointsText,
-			pointsValu,
-			countText,
+			success = 0,
+			generalCount = 0,
+			pointsValue,
 			countValue,
-			successText,
 			successValue,
-			failText,
 			failValue,
 			bonusY,
 			base_fill = {
 				stroke: '#1ABC9C'
 			},
-
 			anim = Raphael.animation(animParam, 5000),
 			animParam = {
 				y: 450
 			},
-
-
 			animC = Raphael.animation(animParamC, 5000),
 			animParamC = {
 				cy: 450
-			};
-
+			},
 
 
 		init = function(holder) {
@@ -78,46 +66,48 @@ define([
 
 		initPoints = function() {
 
-			lineLeft = paper.path("M{0} {1}L{2} {3}", 95, 5, 95, 497);
-			pointsText = paper.text(50, 25, 'points');
-			pointsValue = paper.text(50, 55, points);
-			countText = paper.text(50, 135, 'counts');
-			countValue = paper.text(50, 165, counts);
-			successText = paper.text(50, 245, 'success');
-			successValue = paper.text(50, 275, 0);
-			failText = paper.text(50, 355, 'fail');
-			failValue = paper.text(50, 385, 0);
-
-			var
-				text_fill = {
+		var 
+			lineLeft = paper.path("M{0} {1}L{2} {3}", 95, 5, 95, 497),
+			pointsText = paper.text(50, 25, 'points'),
+			countText = paper.text(50, 135, 'counts'),
+			successText = paper.text(50, 245, 'success'),
+			failText = paper.text(50, 355, 'fail'),
+			text_fill = {
 					fill: '#E74C3C',
 					"font-family": "Lato, sans-serif",
 					'font-size': "15"
-				},
-				value_fill = {
+			},
+			value_fill = {
 					fill: '#1ABC9C',
 					"font-family": "Lato, sans-serif",
 					'font-size': "30"
-				};
+			};
+				
+		pointsValue = paper.text(50, 55, points);
+			
+		countValue = paper.text(50, 165, 0);
+			
+		successValue = paper.text(50, 275, 0);
+			
+		failValue = paper.text(50, 385, 0);
 
+		lineLeft.attr(base_fill);
 
-			lineLeft.attr(base_fill);
+		pointsText.attr(text_fill);
 
-			pointsText.attr(text_fill);
+		pointsValue.attr(value_fill);
 
-			pointsValue.attr(value_fill);
+		countText.attr(text_fill);
 
-			countText.attr(text_fill);
+		countValue.attr(value_fill);
 
-			countValue.attr(value_fill);
+		successText.attr(text_fill);
 
-			successText.attr(text_fill);
+		successValue.attr(value_fill);
 
-			successValue.attr(value_fill);
+		failText.attr(text_fill);
 
-			failText.attr(text_fill);
-
-			failValue.attr(value_fill);
+		failValue.attr(value_fill);
 
 		},
 
@@ -145,28 +135,32 @@ define([
 
 		createSet = function() {
 
-			counts += 1;
+			var
+				text,
+				circ,
+				color = getColor(),
+				c_fill = {
+					fill: 'none',
+					stroke: color,
+					"stroke-width": 8
+				},
+				t_fill = {
+					fill: color,
+					"font-family": "Lato, sans-serif",
+					'font-size': "25"
+				};
+				
+				
 
-			updateCount(counts);
+			generalCount += 1;
+
+			updateCount(generalCount);
 
 			$('#paper').removeClass("success");
 			$('#paper').removeClass("error");
 			$('#value').focus();
 
-			var color = getColor();
-
-			var c_fill = {
-				fill: 'none',
-				stroke: color,
-				"stroke-width": 8
-			};
-
-			var t_fill = {
-				fill: color,
-				"font-family": "Lato, sans-serif",
-				'font-size': "25"
-			};
-
+						
 			var randomNum1 = getRandom(2, 9);
 
 			var randomNum2 = getRandom(2, 9);
@@ -177,26 +171,26 @@ define([
 
 			var question = randomNum1 + " x " + randomNum2;
 
-			rect = paper.circle(randomX, 10, 50);
-			rect.attr(c_fill);
+			circ = paper.circle(randomX, 10, 50);
+			circ.attr(c_fill);
 
 
 			text = paper.text(randomX, 10, question);
 			text.data('value', answer);
-			rect.data('value', answer);
+			circ.data('value', answer);
 			text.attr(t_fill);
 
 
-			set.push(rect, text);
+			set.push(circ, text);
 
 
 			moveAnimation();
-			rect.animate(animC);
-			text.animateWith(rect, animParam, anim);
+			circ.animate(animC);
+			text.animateWith(circ, animParam, anim);
 
 
 
-			if (count >= countCheck) {
+			if (correctCount >= countCheck) {
 				if (time > 1000) {
 					time -= 500;
 				}
@@ -209,11 +203,12 @@ define([
 		},
 
 		stop = function() {
-			var value = $('#value').val();
+			var value = $('#value').val(),
+				bonusX;
 
 			set.forEach(function(elem) {
 				if (value == elem.data("value")) {
-					count += 0.5;
+					correctCount += 0.5;
 					$('#paper').addClass("success");
 
 					if (elem.type === 'circle') {
@@ -233,6 +228,7 @@ define([
 
 		animateSuccess = function(x, y) {
 			var bonus = paper.text(x, y, "+10");
+			
 
 			var bonus_fill = {
 				fill: "#1ABC9C",
@@ -264,7 +260,7 @@ define([
 
 		animateFault = function(x, y) {
 			var bonus = paper.text(x, y, "-10");
-
+				
 			var bonus_fill = {
 				fill: "#E74C3C",
 				"font-family": "Lato, sans-serif",
@@ -348,6 +344,7 @@ define([
 		},
 
 		updateSuccess = function(text) {
+
 			successValue.attr({
 				text: text
 			});

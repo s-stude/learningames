@@ -1,10 +1,10 @@
 define([
 
 	'underscore',
-		'backbone',
-		'jquery',
-		'circles/desk',
-		'text!circles/templates/circleView.html'
+	'backbone',
+	'jquery',
+	'circles/desk',
+	'text!circles/templates/circleView.html'
 
 ], function(_, Backbone, $, Desk, circleViewTemplate) {
 
