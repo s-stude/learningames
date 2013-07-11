@@ -13,6 +13,7 @@ define([
 			paper,
 			interval,
 			time = 4000,
+			hours = 1,
 			correctCount = 0,
 			countCheck = 5,
 			points = 0,
@@ -55,6 +56,8 @@ define([
 				stop();
 			});
 
+			stopWatch();
+
 
 			$(document).keydown(function(event) {
 				if (event.keyCode === 13) {
@@ -69,9 +72,10 @@ define([
 		var 
 			lineLeft = paper.path("M{0} {1}L{2} {3}", 95, 5, 95, 497),
 			pointsText = paper.text(50, 25, 'points'),
-			countText = paper.text(50, 135, 'counts'),
-			successText = paper.text(50, 245, 'success'),
-			failText = paper.text(50, 355, 'fail'),
+			countText = paper.text(50, 125, 'counts'),
+			successText = paper.text(50, 225, 'success'),
+			failText = paper.text(50, 325, 'fail'),
+			timeText = paper.text(50, 425, 'time'),
 			text_fill = {
 					fill: '#E74C3C',
 					"font-family": "Lato, sans-serif",
@@ -85,11 +89,11 @@ define([
 				
 		pointsValue = paper.text(50, 55, points);
 			
-		countValue = paper.text(50, 165, 0);
+		countValue = paper.text(50, 155, 0);
 			
-		successValue = paper.text(50, 275, 0);
+		successValue = paper.text(50, 255, 0);
 			
-		failValue = paper.text(50, 385, 0);
+		failValue = paper.text(50, 355, 0);
 
 		lineLeft.attr(base_fill);
 
@@ -108,6 +112,8 @@ define([
 		failText.attr(text_fill);
 
 		failValue.attr(value_fill);
+
+		timeText.attr(text_fill);
 
 		},
 
@@ -132,6 +138,54 @@ define([
 
 
 		},
+
+		stopWatch = function()
+		{
+			
+			paper.customAttributes.arc = function (xloc, yloc, value, total, R) {
+
+
+                    var alpha = 360 / total * value,
+                        a = (90 - alpha) * Math.PI / 180,
+                        x = xloc + R * Math.cos(a),
+                        y = yloc - R * Math.sin(a),
+                        path;
+                    if (total == value) {
+                        path = [
+                            ["M", xloc, yloc - R],
+                            ["A", R, R, 0, 1, 1, xloc - 0.01, yloc - R]
+                        ];
+                    } else {
+                        path = [
+                            ["M", xloc, yloc - R],
+                            ["A", R, R, 0, +(alpha > 180), 1, x, y]
+                        ];
+                    }
+                    return {
+                        path: path
+                    };
+                };
+
+                
+                var strokeRadius = 20;
+                
+                var indicatorArc = paper.path().attr({
+                    "stroke": "#1ABC9C",
+                    "stroke-width": 5,
+                    arc: [50, 465, 60, 60, strokeRadius]
+                });
+                
+                indicatorArc.animate({
+                    arc: [50, 465, 0, 60, strokeRadius]
+                }, 60000, function(){
+                    // anim complete here
+                });
+				
+
+		},
+
+    
+		
 
 		createSet = function() {
 
