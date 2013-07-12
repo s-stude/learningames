@@ -85,7 +85,16 @@ define([
 					fill: '#1ABC9C',
 					"font-family": "Lato, sans-serif",
 					'font-size': "30"
-			};
+			},
+			watch_fill = 
+			{
+					"stroke": "#E74C3C",
+					"stroke-width": 2
+			},
+			watch = paper.circle(50, 470, 28);
+
+
+ 
 				
 		pointsValue = paper.text(50, 55, points);
 			
@@ -114,6 +123,8 @@ define([
 		failValue.attr(value_fill);
 
 		timeText.attr(text_fill);
+
+		watch.attr(watch_fill);
 
 		},
 
@@ -167,16 +178,16 @@ define([
                 };
 
                 
-                var strokeRadius = 20;
+                var strokeRadius = 15;
                 
                 var indicatorArc = paper.path().attr({
                     "stroke": "#1ABC9C",
-                    "stroke-width": 5,
-                    arc: [50, 465, 60, 60, strokeRadius]
+                    "stroke-width": 25,
+                    arc: [50, 470, 0, 60, strokeRadius]
                 });
                 
                 indicatorArc.animate({
-                    arc: [50, 465, 0, 60, strokeRadius]
+                    arc: [50, 470, 60, 60, strokeRadius]
                 }, 60000, function(){
                     // anim complete here
                 });
