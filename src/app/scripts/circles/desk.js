@@ -9,7 +9,7 @@ define([
 	return (function Desk() {
 
 		var
-			width,
+		    width,
 			paper,
 			interval,
 			time = 4000,
@@ -36,172 +36,217 @@ define([
 			animParamC = {
 				cy: 450
 			},
+			arc,
 
 
-		init = function(holder) {
+			init = function(holder) {
 
-			width = $('#' + holder).width();
+				width = $('#' + holder).width();
 
-			paper = Raphael(holder, width, 500);
+				paper = Raphael(holder, width, 500);
 
-			initPoints();
+				initPoints();
 
-			interval = setInterval(createSet, time);
+				interval = setInterval(createSet, time);
 
-			set = paper.set();
+				set = paper.set();
 
-			$('#value').focus();
+				$('#value').focus();
 
-			$('#enter').click(function() {
-				stop();
-			});
-
-			stopWatch();
-
-
-			$(document).keydown(function(event) {
-				if (event.keyCode === 13) {
+				$('#enter').click(function() {
 					stop();
-				}
-			});
+				});
 
-		},
+				stopWatch();
 
-		initPoints = function() {
 
-		var 
-			lineLeft = paper.path("M{0} {1}L{2} {3}", 95, 5, 95, 497),
-			pointsText = paper.text(50, 25, 'points'),
-			countText = paper.text(50, 125, 'counts'),
-			successText = paper.text(50, 225, 'success'),
-			failText = paper.text(50, 325, 'fail'),
-			timeText = paper.text(50, 425, 'time'),
-			text_fill = {
-					fill: '#E74C3C',
-					"font-family": "Lato, sans-serif",
-					'font-size': "15"
+				$(document).keydown(function(event) {
+					if (event.keyCode === 13) {
+						stop();
+					}
+				});
+
 			},
-			value_fill = {
-					fill: '#1ABC9C',
-					"font-family": "Lato, sans-serif",
-					'font-size': "30"
+
+			initPoints = function() {
+
+				var
+				    lineLeft = paper.path("M{0} {1}L{2} {3}", 95, 5, 95, 497),
+					pointsText = paper.text(50, 25, 'points'),
+					countText = paper.text(50, 125, 'counts'),
+					successText = paper.text(50, 225, 'success'),
+					failText = paper.text(50, 325, 'fail'),
+					timeText = paper.text(50, 425, 'time'),
+					text_fill = {
+						fill: '#E74C3C',
+						"font-family": "Lato, sans-serif",
+						'font-size': "15"
+					},
+					value_fill = {
+						fill: '#1ABC9C',
+						"font-family": "Lato, sans-serif",
+						'font-size': "30"
+					},
+					watch_fill = {
+						"stroke": "#E74C3C",
+						"stroke-width": 2
+					},
+					watch = paper.circle(50, 470, 28);
+
+					paper.customAttributes.arc = function(xloc, yloc, value, total, R) {
+
+
+					var alpha = 360 / total * value,
+						a = (90 - alpha) * Math.PI / 180,
+						x = xloc + R * Math.cos(a),
+						y = yloc - R * Math.sin(a),
+						path;
+					if (total == value) {
+						path = [
+							["M", xloc, yloc - R],
+							["A", R, R, 0, 1, 1, xloc - 0.01, yloc - R]
+						];
+					} else {
+						path = [
+							["M", xloc, yloc - R],
+							["A", R, R, 0, +(alpha > 180), 1, x, y]
+						];
+					}
+					return {
+						path: path
+					};
+				};
+
+				pointsValue = paper.text(50, 55, points);
+
+				countValue = paper.text(50, 155, 0);
+
+				successValue = paper.text(50, 255, 0);
+
+				failValue = paper.text(50, 355, 0);
+
+				lineLeft.attr(base_fill);
+
+				pointsText.attr(text_fill);
+
+				pointsValue.attr(value_fill);
+
+				countText.attr(text_fill);
+
+				countValue.attr(value_fill);
+
+				successText.attr(text_fill);
+
+				successValue.attr(value_fill);
+
+				failText.attr(text_fill);
+
+				failValue.attr(value_fill);
+
+				timeText.attr(text_fill);
+
+				watch.attr(watch_fill);
+
 			},
-			watch_fill = 
+
+			moveAnimation = function()
+
 			{
-					"stroke": "#E74C3C",
-					"stroke-width": 2
+
+				animC = Raphael.animation({
+					cy: 450
+				}, 5000, "bounce", function() {
+					animateFault(this.attr('cx'), 450);
+					this.remove();
+
+				});
+
+				anim = Raphael.animation({
+					y: 450
+				}, 5000, "bounce", function() {
+					this.remove();
+				});
+
+
+
 			},
-			watch = paper.circle(50, 470, 28);
+
+			stopWatch = function() {
+
+				var strokeRadius = 15;
+
+				var indicatorArc = paper.path().attr({
+					"stroke": "#1ABC9C",
+					"stroke-width": 25,
+					arc: [50, 470, 0, 60, strokeRadius]
+				});
+
+				indicatorArc.animate({
+					arc: [50, 470, 60, 60, strokeRadius]
+				}, 1000, function() {
+					clearInterval(interval);
+					displayResults(20, 250, "#E74C3C");
+					displayResults(8, 500, "#1ABC9C");
+					displayResults(28, 750, "#34495E");
+				});
 
 
- 
-				
-		pointsValue = paper.text(50, 55, points);
-			
-		countValue = paper.text(50, 155, 0);
-			
-		successValue = paper.text(50, 255, 0);
-			
-		failValue = paper.text(50, 355, 0);
+			},
 
-		lineLeft.attr(base_fill);
-
-		pointsText.attr(text_fill);
-
-		pointsValue.attr(value_fill);
-
-		countText.attr(text_fill);
-
-		countValue.attr(value_fill);
-
-		successText.attr(text_fill);
-
-		successValue.attr(value_fill);
-
-		failText.attr(text_fill);
-
-		failValue.attr(value_fill);
-
-		timeText.attr(text_fill);
-
-		watch.attr(watch_fill);
-
-		},
-
-		moveAnimation = function()
-
-		{
-
-			animC = Raphael.animation({
-				cy: 450
-			}, 5000, "bounce", function() {
-				animateFault(this.attr('cx'), 450);
-				this.remove();
-
-			});
-
-			anim = Raphael.animation({
-				y: 450
-			}, 5000, "bounce", function() {
-				this.remove();
-			});
+			displayResults = function(points, location, color) {
+				var ranges = _.range(0, points, 1),
+					pointsText = paper.text(location, 200, 0),
+					i = 0,
+					resultInterval = setInterval(function() {
+						pointsText.attr({
+							text: roundNumber(ranges[i], 2),
+							fill: '#34495E',
+							"font-family": "Lato, sans-serif",
+							'font-size': "30"
+						});
+						i++;
+						if (i >= ranges.length)
+						{
+							clearInterval(resultInterval);
+							pointsText.attr({text: points})
+						}
+					}, 100);
 
 
+				var circ = paper.circle(location, 200, 60);
 
-		},
-
-		stopWatch = function()
-		{
-			
-			paper.customAttributes.arc = function (xloc, yloc, value, total, R) {
-
-
-                    var alpha = 360 / total * value,
-                        a = (90 - alpha) * Math.PI / 180,
-                        x = xloc + R * Math.cos(a),
-                        y = yloc - R * Math.sin(a),
-                        path;
-                    if (total == value) {
-                        path = [
-                            ["M", xloc, yloc - R],
-                            ["A", R, R, 0, 1, 1, xloc - 0.01, yloc - R]
-                        ];
-                    } else {
-                        path = [
-                            ["M", xloc, yloc - R],
-                            ["A", R, R, 0, +(alpha > 180), 1, x, y]
-                        ];
-                    }
-                    return {
-                        path: path
-                    };
-                };
-
-                
-                var strokeRadius = 15;
+				circ.attr(
+    			{
+            		"stroke": color,
+             		"stroke-width": 10,
+        			opacity: 0.5        
+    			});
+    		
                 
                 var indicatorArc = paper.path().attr({
-                    "stroke": "#1ABC9C",
-                    "stroke-width": 25,
-                    arc: [50, 470, 0, 60, strokeRadius]
+                    "stroke": color,
+                    "stroke-width": 10,
+                    arc: [location, 200, 0, 30, 60]
                 });
                 
                 indicatorArc.animate({
-                    arc: [50, 470, 60, 60, strokeRadius]
-                }, 60000, function(){
+                    arc: [location, 200, points, 30, 60]
+                }, ranges.length*100, function(){
                     // anim complete here
                 });
-				
 
-		},
 
-    
-		
+
+
+
+			},
+
+
 
 		createSet = function() {
 
 			var
-				text,
+			text,
 				circ,
 				color = getColor(),
 				c_fill = {
@@ -214,8 +259,8 @@ define([
 					"font-family": "Lato, sans-serif",
 					'font-size': "25"
 				};
-				
-				
+
+
 
 			generalCount += 1;
 
@@ -225,7 +270,7 @@ define([
 			$('#paper').removeClass("error");
 			$('#value').focus();
 
-						
+
 			var randomNum1 = getRandom(2, 9);
 
 			var randomNum2 = getRandom(2, 9);
@@ -259,7 +304,6 @@ define([
 				if (time > 1000) {
 					time -= 500;
 				}
-				clearInterval(interval);
 				interval = setInterval(createSet, time);
 				countCheck += 5;
 			}
@@ -293,7 +337,7 @@ define([
 
 		animateSuccess = function(x, y) {
 			var bonus = paper.text(x, y, "+10");
-			
+
 
 			var bonus_fill = {
 				fill: "#1ABC9C",
@@ -325,7 +369,7 @@ define([
 
 		animateFault = function(x, y) {
 			var bonus = paper.text(x, y, "-10");
-				
+
 			var bonus_fill = {
 				fill: "#E74C3C",
 				"font-family": "Lato, sans-serif",
@@ -368,6 +412,12 @@ define([
 				text: text
 			});
 		},
+
+		roundNumber = function (number, digits) {
+            var multiple = Math.pow(10, digits);
+            var rndedNum = Math.round(number * multiple) / multiple;
+            return rndedNum;
+        },
 
 
 		updateCount = function(count) {
