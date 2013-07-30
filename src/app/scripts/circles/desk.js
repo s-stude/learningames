@@ -183,11 +183,14 @@ define([
 
 				indicatorArc.animate({
 					arc: [50, 470, 60, 60, strokeRadius]
-				}, 1000, function() {
+				}, 60000, function() {
+					set.forEach(function(elem){
+						elem.remove();
+					})
 					clearInterval(interval);
-					displayResults(20, 250, "#E74C3C");
-					displayResults(8, 500, "#1ABC9C");
-					displayResults(28, 750, "#34495E");
+					displayResults(success, 250,"#1ABC9C");
+					displayResults(fail, 500, "#E74C3C");
+					displayResults(generalCount, 750,"#34495E");
 				});
 
 
@@ -304,6 +307,7 @@ define([
 				if (time > 1000) {
 					time -= 500;
 				}
+				clearInterval(interval);
 				interval = setInterval(createSet, time);
 				countCheck += 5;
 			}
