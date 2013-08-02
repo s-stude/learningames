@@ -38,6 +38,7 @@ define([
 			arc,
 			indicatorArc,
 			allElements,
+			resume,
 
 
 			init = function(holder) {
@@ -75,7 +76,7 @@ define([
 					if (prevType !== e.type) { //  reduce double fire issues
 						switch (e.type) {
 							case "blur":
-							if(interval)
+							if(interval && (!resume || !resume.id))
 							{
 								set.forEach(function(elem) {
 									elem.pause();
@@ -96,7 +97,7 @@ define([
 					$(this).data("prevType", e.type);
 				});
 
-				createSet();
+				setTimeout(createSet, 1000);
 
 			},
 
@@ -119,8 +120,7 @@ define([
 
 
 			displayResume = function() {
-				var resume,
-					cenetrX = paper.width / 2,
+				var cenetrX = paper.width / 2,
 					centerY = paper.height / 2;
 
 				resume = paper.path("M" + cenetrX + "," + centerY + "l50,25 c4,2.5 4,7.5 0,10 l-50,25 c-4,2.5 -7.5,0 -7.5, -5 l0,-50 c0,-5 4,-7.5 7.5-5z");
