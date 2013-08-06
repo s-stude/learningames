@@ -255,11 +255,11 @@ define([
 				$('#value').focus();
 
 
-				var randomNum1 = getRandom(2, 9);
+				var randomNum1 = _.random(2, 9);
 
-				var randomNum2 = getRandom(2, 9);
+				var randomNum2 = _.random(2, 9);
 
-				var randomX = getRandom(150, (width - 55));
+				var randomX = _.random(150, (width - 55));
 
 				var answer = randomNum1 * randomNum2;
 
@@ -381,14 +381,10 @@ define([
 
 			},
 
-			getRandom = function(min, max) {
-				return min + Math.floor(Math.random() * (max - min + 1));
-			},
-
 			getColor = function() {
 				//var colors = new Array("#2ECC71","#3498DB","#9B59B6","#34495E","#2980B9","#8E44AD","#F39C12","#D35400","#E67E22");
 				var colors = new Array("#1ABC9C", "#3498DB", "#9B59B6", "#E74C3C", "#34495E");
-				return colors[getRandom(0, 4)];
+				return colors[_.random(0, 4)];
 			},
 
 			roundNumber = function(number, digits) {
