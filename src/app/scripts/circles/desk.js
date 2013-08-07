@@ -194,8 +194,8 @@ define([
 
 
 				if (correctCount >= countCheck) {
-					if (time > 1000) {
-						time -= 500;
+					if (time > 1500) {
+						time -= 250;
 					}
 					clearInterval(interval);
 					interval = setInterval(createSet, time);

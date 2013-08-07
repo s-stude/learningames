@@ -7,7 +7,7 @@ define([
 			fail = 0,
 			success = 0,
 			generalCount = 0,
-			stopWatchTime = 20000,
+			stopWatchTime = 180000,
 			pointsValue,
 			countValue,
 			successValue,
@@ -82,9 +82,7 @@ define([
 
 			generalCount += 1;
 
-
-			var prCount = paper.text(0, 165, generalCount);
-
+			var prCount = paper.text(0, 155, generalCount);
 
 			var prCount_fill = {
 				fill: '#1ABC9C',
@@ -150,9 +148,9 @@ define([
 				});
 				clearInterval(interval);
 				end = true;
-				displayResults(success, 250, "#1ABC9C", paper);
-				displayResults(fail, 500, "#E74C3C", paper);
-				displayResults(generalCount, 750, "#34495E", paper);
+				displayResults(success, 250, "#1ABC9C", "success", paper);
+				displayResults(fail, 500, "#E74C3C", "fail", paper);
+				displayResults(generalCount, 750, "#34495E", "count", paper);
 			});
 
 
@@ -172,9 +170,16 @@ define([
 			return end;
 		},
 
-		displayResults = function(points, location, color, paper) {
+		displayResults = function(points, location, color, text, paper) {
 			var ranges = _.range(0, points, 1),
-				pointsText = paper.text(location, 200, 0),
+				locationY = 200,
+				pointsText = paper.text(location, locationY, 0),
+				resultText = paper.text(location, locationY + 80, text),
+				text_fill = {
+					fill: '#34495E',
+					"font-family": "Lato, sans-serif",
+					'font-size': "15"
+				},
 				i = 0,
 				resultInterval = setInterval(function() {
 					pointsText.attr({
@@ -192,8 +197,8 @@ define([
 					}
 				}, 100);
 
-
-			var circ = paper.circle(location, 200, 60);
+            resultText.attr(text_fill);
+            var circ = paper.circle(location, locationY, 60);
 
 			circ.attr({
 				"stroke": color,
@@ -205,11 +210,11 @@ define([
 			var indicatorArc = paper.path().attr({
 				"stroke": color,
 				"stroke-width": 10,
-				arc: [location, 200, 0, 30, 60]
+				arc: [location, locationY, 0, 77, 60]
 			});
 
 			indicatorArc.animate({
-				arc: [location, 200, points, 30, 60]
+				arc: [location, locationY, points, 77, 60]
 			}, ranges.length * 100, function() {
 				// anim complete here
 			});
