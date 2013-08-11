@@ -8,7 +8,8 @@ require.config({
 	},
     packages: [
         'puzzles',
-        'circles'
+        'circles',
+        'planks'
     ]
 });
 
