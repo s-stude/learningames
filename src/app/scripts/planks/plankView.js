@@ -14,7 +14,7 @@ define([
 
             Desk.init({
                 holder:'plank-view__paper',
-                paperWeight:500,
+                paperWidth:960,
                 paperHeight:500,
                 plankWeight:25,
                 plankHeight:100,

@@ -40,15 +40,15 @@ define([
                 plank.ox = plank.attr('x');
                 plank.oy = plank.attr('y');
 
-                props.planksToMove = props.paper.set();
+                props.planksToDrag = props.paper.set();
 
                 plankIndex = plank.data('index');
 
 
-                if (get('index') + 2 >= plankIndex) {
+                if (props.canDrag && get('index') + 2 >= plankIndex) {
                     _.each(get('planks'), function(p) {
                         if (p.rect.data('index') <= plankIndex) {
-                            props.planksToMove.push(p.rect);
+                            props.planksToDrag.push(p.rect);
                         }
                     });
                 }
@@ -57,21 +57,20 @@ define([
 
             plankDragOnMove = function(plank, dx, dy) {
 
-                var nowY = Math.max(50, plank.oy + dy);
+                var nowY = Math.max(100, plank.oy + dy);
 
-                nowY = Math.min(200, nowY);
+                nowY = Math.min(250, nowY);
 
-                props.planksToMove.attr({
+                props.planksToDrag.attr({
                     y: nowY
                 });
 
-                if (plank.attr('y') > 150) {
-                    props.planksToMove.attr({
+                if (plank.attr('y') > 200) {
+                    props.planksToDrag.attr({
                         fill: 'red'
                     });
-                } 
-                else {
-                    props.planksToMove.attr({
+                } else {
+                    props.planksToDrag.attr({
                         fill: '#2ECC71'
                     });
                 }
@@ -79,22 +78,53 @@ define([
             },
 
             plankDragOnEnd = function(plank) {
-                if (plank.attr('y') > 150) {
-                    props.planksToMove.remove();
-                    props.index += props.planksToMove.length;
+                if (plank.attr('y') > 200) {
+                    props.planksToDrag.remove();
+                    props.index += props.planksToDrag.length;
+                    props.canDrag = false;
+                    movePlanks();
                 } else {
-                    props.planksToMove.attr({
+                    props.planksToDrag.attr({
                         y: plank.oy
                     });
                 }
 
             },
 
+            movePlanks = function() {
+                var currentIndex = props.index,
+                    planksToMove = props.paper.set(),
+                    countToMove;
+
+                if (currentIndex < props.target) {
+                    countToMove = props.target - currentIndex;
+                } else {
+                    countToMove = _.random(1, 3);
+
+                }
+
+                _.each(get('planks'), function(p) {
+                    if (p.rect.data('index') < currentIndex + countToMove) {
+                        planksToMove.push(p.rect);
+                        p.rect.animate({
+                            y: 0
+                        }, 1000, function() {
+                            p.rect.remove();
+                            props.canDrag = true;
+                            
+                        });
+                    }
+                });
+
+                props.index += planksToMove.length;
+                props.target += 4;
+            },
+
             initPlanks = function() {
                 var
                 planks = [],
                     x = 85,
-                    y = 50;
+                    y = 100;
 
                 for (var i = 0; i < get('planksCount'); i++) {
 
@@ -119,6 +149,8 @@ define([
 
                 props.planks = planks;
                 props.index = 0;
+                props.canDrag = true;
+                props.target = 3;
 
             };
 
