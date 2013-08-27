@@ -9,14 +9,11 @@ define([
     return (function Desk() {
 
         var props = {},
-            get = function(prop) {
-                return props[prop];
-            },
-
+           
             initProps = function(overrides) {
                 var computed = {
-                    holder: overrides.holder,
-                    paperWidth: overrides.paperWidth,
+                    holder:      overrides.holder,
+                    paperWidth:  overrides.paperWidth,
                     paperHeight: overrides.paperHeight,
                     plankWeight: overrides.plankWeight,
                     plankHeight: overrides.plankHeight,
@@ -32,7 +29,7 @@ define([
 
             init = function(overrides) {
                 initProps(overrides);
-                props.paper = Raphael(get('holder'), get('paperWidth'), get('paperHeight'));
+                props.paper = Raphael(props.holder, props.paperWidth, props.paperHeight);
                 initPlanks();
             },
 
@@ -45,8 +42,8 @@ define([
                 plankIndex = plank.data('index');
 
 
-                if (props.canDrag && get('index') + 2 >= plankIndex) {
-                    _.each(get('planks'), function(p) {
+                if (props.canDrag && props.index + 2 >= plankIndex) {
+                    _.each(props.planks, function(p) {
                         if (p.rect.data('index') <= plankIndex) {
                             props.planksToDrag.push(p.rect);
                         }
@@ -103,7 +100,7 @@ define([
 
                 }
 
-                _.each(get('planks'), function(p) {
+                _.each(props.planks, function(p) {
                     if (p.rect.data('index') < currentIndex + countToMove) {
                         planksToMove.push(p.rect);
                         p.rect.animate({
@@ -126,17 +123,17 @@ define([
                     x = 85,
                     y = 100;
 
-                for (var i = 0; i < get('planksCount'); i++) {
+                for (var i = 0; i < props.planksCount; i++) {
 
                     x += 35;
 
                     var p = plank.create({
-                        paper: get('paper'),
+                        paper: props.paper,
                         x: x,
                         y: y,
                         index: i,
-                        weight: get('plankWeight'),
-                        height: get('plankHeight'),
+                        weight: props.plankWeight,
+                        height: props.plankHeight,
                         onStart: plankDragOnStart,
                         onMove: plankDragOnMove,
                         onEnd: plankDragOnEnd

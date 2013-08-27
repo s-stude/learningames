@@ -4,8 +4,13 @@
 }
 
 
-#circle_view__elements input
+#circle_view__elements .product
 {
-	height: 30px; 
 	margin-bottom: 0;
+	width: 45px;
+	color: #1ABC9C;
+	font-size: 30px;
+	border: 2px solid #EC7063;
+	
 }
+

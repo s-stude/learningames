@@ -6,37 +6,29 @@ define([
 ], function($, _, Raphael, Points) {
 	return (function Desk() {
 
-		var width,
-			paper,
-			interval,
-			time = 4000,
-			correctCount = 0,
-			countCheck = 5,
-			bonusY,
-			anim,
-			animParam = {
-				y: 450
-			},
-			animC,
-			animParamC = {
-				cy: 450
-			},
-			allElements,
-			resume,
+		var props = {},
 
 			init = function(holder) {
-				width = $('#' + holder).width();
-				paper = Raphael(holder, width, 500);
-				Points.init(paper);
-				interval = setInterval(createSet, time);
-				Points.updateInterval(interval);
-				set = paper.set();
-				$('#value').focus();
+				props.width = $('#' + holder).width();
+				props.paper = Raphael(holder, props.width, 500);
+				initProps();
+				Points.init(props.paper);
+				props.interval = setInterval(createSet, props.time);
+				Points.updateInterval(props.interval);
+				set = props.paper.set();
+				makeFocus();
 				$('#enter').click(function() {
 					stop();
 				});
 
-				Points.stopWatch(paper,interval);
+				$('.val').click(function(e) {
+					e.preventDefault();
+					var value = $(this).attr("value");
+					$("#value").val($("#value").val() + value);
+
+				});
+
+				Points.stopWatch(props.paper, props.interval);
 				$(document).keydown(function(event) {
 					if (event.keyCode === 13) {
 						stop();
@@ -48,12 +40,12 @@ define([
 					if (prevType !== e.type) { //  reduce double fire issues
 						switch (e.type) {
 							case "blur":
-								if (!Points.endOfGame() && (!resume || !resume.id)) {
+								if (!Points.endOfGame() && (!props.resume || !props.resume.id)) {
 									set.forEach(function(elem) {
 										elem.pause();
 									});
 									Points.stopWatchPause();
-									clearInterval(interval);
+									clearInterval(props.interval);
 									hideAllElements();
 									displayResume();
 								}
@@ -67,14 +59,35 @@ define([
 				setTimeout(createSet, 1000);
 			},
 
+			initProps = function() {
+				props.time = 4000;
+				props.correctCount = 0;
+				props.countCheck = 5;
+				props.animParam = {
+					y: 450
+				};
+				props.animParamC = {
+					cy: 450
+				};
+				props.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+			},
+
+			makeFocus = function() {
+				if (!props.isMobile) {
+					$('#value').focus();
+
+				}
+			},
+
 			hideAllElements = function() {
-				var bot = paper.bottom;
-				allElements = paper.set();
+				var bot = props.paper.bottom;
+				props.allElements = props.paper.set();
 				while (bot) {
-					allElements.push(bot);
+					props.allElements.push(bot);
 					bot = bot.next;
 				}
-				allElements.attr({
+				props.allElements.attr({
 					opacity: 0.3
 				});
 				$('#circle_view__elements').css('opacity', '0.3');
@@ -82,38 +95,38 @@ define([
 			},
 
 			displayResume = function() {
-				var cenetrX = paper.width / 2,
-					centerY = paper.height / 2;
+				var cenetrX = props.paper.width / 2,
+					centerY = props.paper.height / 2;
 
-				resume = paper.path("M" + cenetrX + "," + centerY + "l50,25 c4,2.5 4,7.5 0,10 l-50,25 c-4,2.5 -7.5,0 -7.5, -5 l0,-50 c0,-5 4,-7.5 7.5-5z");
+				props.resume = props.paper.path("M" + cenetrX + "," + centerY + "l50,25 c4,2.5 4,7.5 0,10 l-50,25 c-4,2.5 -7.5,0 -7.5, -5 l0,-50 c0,-5 4,-7.5 7.5-5z");
 
-				resume.attr({
+				props.resume.attr({
 					cursor: 'pointer',
 					//'stroke-width': 8,
 					fill: '#1ABC9C',
 					stroke: '#1ABC9C'
 				});
 
-				resume.click(function() {
+				props.resume.click(function() {
 					set.forEach(function(elem) {
 						elem.resume();
 					});
 
 					Points.stopWatchResume();
-					
-					allElements.attr({
+
+					props.allElements.attr({
 						opacity: 1
 					});
 					$('#circle_view__elements').css('opacity', '1');
 
-					resume.remove();
+					props.resume.remove();
 
-					interval = setInterval(createSet, time);
+					props.interval = setInterval(createSet, props.time);
 
-					Points.updateInterval(interval);
+					Points.updateInterval(props.interval);
 
-									
-					$('#value').focus();
+
+					makeFocus();
 
 				});
 			},
@@ -122,7 +135,7 @@ define([
 
 			{
 
-				animC = Raphael.animation({
+				props.animC = Raphael.animation({
 					cy: 450
 				}, 5000, "bounce", function() {
 					animateFault(this.attr('cx'), 450);
@@ -130,7 +143,7 @@ define([
 
 				});
 
-				anim = Raphael.animation({
+				props.anim = Raphael.animation({
 					y: 450
 				}, 5000, "bounce", function() {
 					this.remove();
@@ -158,28 +171,28 @@ define([
 					};
 
 
-				Points.updateCount(paper);
+				Points.updateCount(props.paper);
 
 				$('#paper').removeClass("success");
 				$('#paper').removeClass("error");
-				$('#value').focus();
+				makeFocus();
 
 
 				var randomNum1 = _.random(2, 9);
 
 				var randomNum2 = _.random(2, 9);
 
-				var randomX = _.random(150, (width - 55));
+				var randomX = _.random(150, (props.width - 55));
 
 				var answer = randomNum1 * randomNum2;
 
 				var question = randomNum1 + " x " + randomNum2;
 
-				circ = paper.circle(randomX, 10, 50);
+				circ = props.paper.circle(randomX, 10, 50);
 				circ.attr(c_fill);
 
 
-				text = paper.text(randomX, 10, question);
+				text = props.paper.text(randomX, 10, question);
 				text.data('value', answer);
 				circ.data('value', answer);
 				text.attr(t_fill);
@@ -189,18 +202,18 @@ define([
 
 
 				moveAnimation();
-				circ.animate(animC);
-				text.animateWith(circ, animParam, anim);
+				circ.animate(props.animC);
+				text.animateWith(circ, props.animParam, props.anim);
 
 
-				if (correctCount >= countCheck) {
-					if (time > 1500) {
-						time -= 250;
+				if (props.correctCount >= props.countCheck) {
+					if (props.time > 1500) {
+						props.time -= 250;
 					}
-					clearInterval(interval);
-					interval = setInterval(createSet, time);
-					Points.updateInterval(interval);
-					countCheck += 5;
+					clearInterval(props.interval);
+					props.interval = setInterval(createSet, props.time);
+					Points.updateInterval(props.interval);
+					props.countCheck += 5;
 				}
 
 
@@ -212,13 +225,13 @@ define([
 
 				set.forEach(function(elem) {
 					if (elem.data("value") && value === elem.data("value").toString()) {
-						correctCount += 0.5;
+						props.correctCount += 0.5;
 						$('#paper').addClass("success");
 
 						if (elem.type === 'circle') {
 							bonusX = elem.attr('cx');
-							bonusY = elem.attr('cy');
-							animateSuccess(bonusX, bonusY);
+							props.bonusY = elem.attr('cy');
+							animateSuccess(bonusX, props.bonusY);
 						}
 
 						elem.remove();
@@ -231,7 +244,7 @@ define([
 			},
 
 			animateSuccess = function(x, y) {
-				var bonus = paper.text(x, y, "+10");
+				var bonus = props.paper.text(x, y, "+10");
 
 
 				var bonus_fill = {
@@ -242,10 +255,10 @@ define([
 
 				bonus.attr(bonus_fill);
 
-				bonusY = y - 50;
+				props.bonusY = y - 50;
 
 				bonus.animate({
-					y: bonusY
+					y: props.bonusY
 				}, 2000, function() {
 					this.remove();
 				});
@@ -259,7 +272,7 @@ define([
 
 
 			animateFault = function(x, y) {
-				var bonus = paper.text(x, y, "-10");
+				var bonus = props.paper.text(x, y, "-10");
 
 				var bonus_fill = {
 					fill: "#E74C3C",
@@ -269,15 +282,15 @@ define([
 
 				bonus.attr(bonus_fill);
 
-				bonusY = y - 50;
+				props.bonusY = y - 50;
 
 				bonus.animate({
-					y: bonusY
+					y: props.bonusY
 				}, 2000, function() {
 					this.remove();
 				});
 
-				
+
 				Points.updatePoints(false);
 
 				Points.updateFail();
@@ -291,7 +304,7 @@ define([
 				return colors[_.random(0, 4)];
 			};
 
-			
+
 
 		return {
 			init: init
