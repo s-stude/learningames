@@ -1,5 +1,5 @@
 define([
-    '.',
+    'jquery',
     'underscore',
     'raphael',
     'planks/plank'
@@ -9,11 +9,11 @@ define([
     return (function Desk() {
 
         var props = {},
-           
+
             initProps = function(overrides) {
                 var computed = {
-                    holder:      overrides.holder,
-                    paperWidth:  overrides.paperWidth,
+                    holder: overrides.holder,
+                    paperWidth: overrides.paperWidth,
                     paperHeight: overrides.paperHeight,
                     plankWeight: overrides.plankWeight,
                     plankHeight: overrides.plankHeight,
@@ -50,6 +50,12 @@ define([
                     });
                 }
 
+                props.planksToDrag.attr({
+                    fill: '#1abc9c'
+                });
+
+               
+
             },
 
             plankDragOnMove = function(plank, dx, dy) {
@@ -64,12 +70,14 @@ define([
 
                 if (plank.attr('y') > 200) {
                     props.planksToDrag.attr({
-                        fill: 'red'
+                        stroke: '#E74C3C',
+                        fill: '#E74C3C'
                     });
                 } else {
                     props.planksToDrag.attr({
-                        fill: '#2ECC71'
-                    });
+                        stroke: '#1abc9c',
+                        fill: '#1abc9c'
+                     });
                 }
 
             },
@@ -79,10 +87,19 @@ define([
                     props.planksToDrag.remove();
                     props.index += props.planksToDrag.length;
                     props.canDrag = false;
-                    movePlanks();
+                    if (props.index === props.planksCount) {
+                        props.win = false;
+                        endOfGame();
+                    } else {
+                        movePlanks();
+
+                    }
+
                 } else {
                     props.planksToDrag.attr({
-                        y: plank.oy
+                        y: plank.oy,
+                        stroke: '#1abc9c',
+                        fill: 'white'
                     });
                 }
 
@@ -103,18 +120,38 @@ define([
                 _.each(props.planks, function(p) {
                     if (p.rect.data('index') < currentIndex + countToMove) {
                         planksToMove.push(p.rect);
+                        p.rect.attr({
+                            fill: '#1abc9c'
+                        });
                         p.rect.animate({
                             y: 0
                         }, 1000, function() {
                             p.rect.remove();
                             props.canDrag = true;
-                            
+                            endOfGame();
                         });
                     }
                 });
 
                 props.index += planksToMove.length;
                 props.target += 4;
+
+            },
+
+
+            endOfGame = function() {
+                if (props.index === props.planksCount) {
+                    props.paper.remove();
+                    if (props.win) {
+                        $('#endOfGame').toggleClass('hide');
+                        $('#endOfGame').addClass('animated fadeInDownBig');
+                    } else {
+                        $('#endOfGame').toggleClass('hide');
+                        $('#endOfGame').addClass('animated fadeInDownBig');
+                    }
+
+                    
+                }
             },
 
             initPlanks = function() {
@@ -148,6 +185,7 @@ define([
                 props.index = 0;
                 props.canDrag = true;
                 props.target = 3;
+                props.win = true;
 
             };
 

@@ -6,7 +6,7 @@ define([
 
 ], function (_, Backbone, Desk, plankViewTemplate) {
 
-    var PuzzleView = Backbone.View.extend({
+    var PlankView = Backbone.View.extend({
         el:'#plank-view',
 
         initialize:function () {
@@ -23,14 +23,27 @@ define([
         },
 
         events:{
-            'click #btnstartgame':'startGame'
-            
+
+            'click #btnstartgame':'startGame',
+            'click #btn-play-again': 'playAgagin'
         },
 
         startGame:function () {
-
+            console.log('start Game planks');
             this.$('#btnstartgame').addClass('hide');
             this.$('#btnresetgame').removeClass('hide');
+        },
+
+        playAgain:function(){
+            console.log('play again click');
+            Desk.init({
+                holder:'plank-view__paper',
+                paperWidth:960,
+                paperHeight:500,
+                plankWeight:25,
+                plankHeight:100,
+                planksCount:20
+            });
         },
 
         
@@ -42,5 +55,5 @@ define([
 
     });
 
-    return PuzzleView;
+    return PlankView;
 });

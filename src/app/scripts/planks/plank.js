@@ -28,12 +28,12 @@ define(function () {
                     y:props.y,
                     width:props.weight,
                     height:props.height,
+                    r: 5,
                     cursor:'move',
-                    fill: '#2ECC71',
-                    'fill-opacity':0.1,
-                    stroke: '#27AE60',
+                    fill:'white',
+                    stroke:'#1abc9c',
                     'stroke-opacity':1,
-                    "stroke-width": 4
+                    'stroke-width': 4
 
                 });
 
