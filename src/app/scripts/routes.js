@@ -3,14 +3,16 @@ define([
     'backbone',
     'puzzles',
     'circles',
-    'planks'
+    'planks',
+    'sum'
 
 ], function(
 
     Backbone,
     Puzzles,
     Circles,
-    Planks
+    Planks,
+    Sum
 
     ){
 
@@ -18,8 +20,8 @@ define([
         routes: {
             'puzzle-game'  : 'loadPuzzles',
             'circle-game'  : 'loadCircles',
-            'planks-game'  : 'loadPlanks'
-
+            'planks-game'  : 'loadPlanks',
+            'sum-game'     : 'loadSum'
         },
 
         loadPuzzles: function(){
@@ -36,6 +38,11 @@ define([
         {
             new Planks();
 
+        },
+
+        loadSum: function()
+        {
+            new Sum();
         }
     });
 

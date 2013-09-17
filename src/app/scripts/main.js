@@ -9,7 +9,8 @@ require.config({
     packages: [
         'puzzles',
         'circles',
-        'planks'
+        'planks',
+        'sum'
     ]
 });
 
