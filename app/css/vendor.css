@@ -1,0 +1,4 @@
+/*! Includes for RequireJS css optimizer */
+@import url('../../components/bower-bootstrap-css/bootstrap.css');
+@import url('../../static_components/flat-ui/flat-ui.css');
+@import url('../../components/animate.css/animate.min.css');

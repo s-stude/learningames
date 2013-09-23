@@ -1,0 +1,18 @@
+#endOfGame
+{
+	background-color: #16A085;
+	border-radius: 5px;
+}
+
+#btn-play-again
+{
+	margin-bottom: 50px;
+
+}
+
+.text-end-game
+{
+	padding-top: 50px;
+	color: white;
+
+}
