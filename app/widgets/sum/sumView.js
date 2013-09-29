@@ -10,14 +10,11 @@ define( function (require) {
         initialize:function () {
             this.render();
 
-            // Desk.init({
-            //     holder:'sum-view__paper',
-            //     paperWidth:960,
-            //     paperHeight:500,
-            //     plankWeight:25,
-            //     plankHeight:100,
-            //     planksCount:20
-            // });
+            Desk.init({
+                holder:'sum-view__paper',
+                paperWidth:960,
+                paperHeight:500
+            });
         },
 
         events:{

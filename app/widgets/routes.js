@@ -5,6 +5,7 @@ define(function (require) {
     var Puzzles = require('puzzles');
     var Circles = require('circles');
     var Planks = require('planks');
+    var Sum = require('sum');
 
 
     var Router = Backbone.Router.extend({
