@@ -9,11 +9,11 @@ define(function(require) {
 
             polygon.attr({
                 stroke: '#1abc9c',
-                'stroke-opacity': 0.4,
+                'stroke-opacity': 0,
                 'stroke-width': 4,
                 fill: 'white',
                 cursor: 'pointer'
-
+ 
             });
 
             polygon.data('index', props.index);
@@ -22,12 +22,13 @@ define(function(require) {
             return polygon;
         },
             createText = function(props) {
-                var text = props.paper.text(props.startX, props.startY, _.random(2, 9));
+                var text = props.paper.text(props.startX, props.startY, _.random(1, 1));
                 text.attr({
                     'font-family': 'Lato, sans-serif',
                     'font-size': '25',
                     fill: '#e74c3c',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    opacity: 0
                 });
                 text.data('index', props.index);
                 return text;

@@ -67,13 +67,219 @@ define(function(require) {
                         index: i
                     });
 
-                    polygon.click(polygonClick);
-                    text.click(polygonClick);
+                    if (i === 7) {
+                        polygon.attr({
+                            'stroke-width': 6,
+                            stroke: '#e74c3c'
+                        });
+                        text.attr({
+                            text: ''
+                        });
 
-                    props.polygons.push(polygon);
-                    props.texts.push(text);
+                        props.sumPolygon = polygon;
+                        props.sumText = text;
+
+                    } else {
+                        props.polygons.push(polygon);
+                        props.texts.push(text);
+
+                    }
+
+
+
                 }
+
+                props.level = 1;
+                props.startPolygonsCount = 3;
+                props.activeP = props.paper.set();
+                props.activeT = props.paper.set();
+                props.selectedP = props.paper.set();
+                props.selectedT = props.paper.set();
+                start();
             },
+
+            start = function() {
+
+                var arr = [];
+
+                while (arr.length < (props.level + props.startPolygonsCount)) {
+                    var randomnumber = _.random(1, 13);
+                    var found = false;
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i] === randomnumber || randomnumber === 7) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        arr[arr.length] = randomnumber;
+
+                    }
+                }
+
+
+                props.polygons.forEach(function(p) {
+                    if (_.contains(arr, p.data('index'))) {
+                        props.activeP.push(p);
+
+                    }
+                });
+
+                props.texts.forEach(function(t) {
+                    if (_.contains(arr, t.data('index'))) {
+                        props.activeT.push(t);
+
+                    }
+                });
+
+                //props.activeP = _.shuffle(props.activeP);
+                // props.activeT = _.shuffle(props.activeT);
+
+                displayActivePolygons();
+                displayActiveText();
+
+            },
+
+
+            displayActivePolygons = function() {
+
+                var index = 0;
+
+                props.activeP[index].animate({
+                    'stroke-opacity': 0.4
+
+                }, 300, function() {
+                    props.activeP[index].click(polygonClick);
+                    animateNext(++index);
+                });
+
+
+            },
+
+            animateNext = function(index) {
+                if (index < props.activeP.length) {
+
+                    props.activeP[index].animate({
+                        'stroke-opacity': 0.4
+
+                    }, 300, function() {
+                        props.activeP[index].click(polygonClick);
+                        animateNext(++index);
+                    });
+
+                }
+
+            },
+
+            displayActiveText = function() {
+                var index = 0;
+
+                props.activeT[index].animate({
+                    opacity: 1
+
+                }, 300, function() {
+                    props.activeT[index].click(polygonClick);
+                    animateTNext(++index);
+                });
+
+            },
+
+            animateTNext = function(index) {
+                if (index < props.activeT.length) {
+
+                    props.activeT[index].animate({
+                        opacity: 1
+
+                    }, 300, function() {
+                        props.activeT[index].click(polygonClick);
+                        animateTNext(++index);
+                    });
+
+                } else {
+                    props.sumText.attr({
+                        text: sumValue()
+                    });
+
+                    props.sumPolygon.animate({
+                        'stroke-opacity': 0.4
+                    }, 300);
+                    props.sumPolygon.click(polygonSumClick);
+                    props.sumText.animate({
+                        opacity: 1
+                    }, 300);
+                    props.sumText.click(polygonSumClick);
+                }
+
+            },
+
+            sumValue = function() {
+                var shuffleT = _.filter(_.shuffle(props.activeT), function(p) {
+                    return p.data('index') !== 7;
+                });
+                var sum = 0;
+                for (var i = 0; i < shuffleT.length - 1; ++i) {
+                    sum += parseInt(shuffleT[i].attr('text'), 10);
+
+
+                }
+                return sum;
+            },
+
+            polygonSumClick = function() {
+                if (props.selectedP.length === props.activeP.length - 1) {
+                    var sum = 0;
+                    props.selectedT.forEach(function(t) {
+                        sum += parseInt(t.attr('text'), 10);
+                    });
+
+                    if (parseInt(props.sumText.attr('text'), 10) === sum) {
+
+                        if (props.level === 9) {
+                            alert('Great! You win!!!');
+                        } else {
+                            props.sumPolygon.animate({
+                                'stroke-opacity': 1
+                            }, 700, function() {
+                                props.level += 1;
+                                resetDesk();
+                                start();
+                            });
+
+                        }
+
+                    }
+                }
+
+            },
+
+            resetDesk = function() {
+                props.activeP.clear();
+                props.activeT.clear();
+                props.selectedP.clear();
+                props.selectedT.clear();
+
+
+                props.polygons.forEach(function(p) {
+                    p.attr({
+                        'stroke-opacity': 0
+                    });
+                    p.data('selected', 'false');
+                    p.unclick(polygonClick);
+                });
+                props.texts.forEach(function(t) {
+                    t.attr({
+                        opacity: 0
+                    });
+                    t.data('selected', 'false');
+                    t.unclick(polygonClick);
+                });
+                props.sumPolygon.unclick(polygonSumClick);
+                props.sumText.unclick(polygonSumClick);
+
+
+
+            },
+
 
             polygonClick = function() {
 
@@ -83,23 +289,42 @@ define(function(require) {
                         if (p.data('selected') !== 'true') {
                             p.animate({
                                 'stroke-opacity': 1
-                                
+
                             }, 700);
 
                             p.data('selected', 'true');
+                            props.selectedP.push(p);
 
                         } else {
                             p.animate({
                                 'stroke-opacity': 0.4
-                                
+
                             }, 700);
 
                             p.data('selected', 'false');
+                            props.selectedP.pop(p);
                         }
 
 
                     }
                 });
+
+                props.texts.forEach(function(t) {
+                    if (t.data('index') === index) {
+                        if (t.data('selected') !== 'true') {
+                            t.data('selected', 'true');
+                            props.selectedT.push(t);
+
+                        } else {
+                            t.data('selected', 'false');
+                            props.selectedT.pop(t);
+                        }
+
+
+                    }
+                });
+
+
             };
 
 
