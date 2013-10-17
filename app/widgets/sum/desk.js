@@ -89,7 +89,6 @@ define(function(require) {
 
                 }
 
-                props.level = 1;
                 props.startPolygonsCount = 3;
                 props.activeP = props.paper.set();
                 props.activeT = props.paper.set();
@@ -102,16 +101,16 @@ define(function(require) {
 
                 var arr = [];
 
-                while (arr.length < (props.level + props.startPolygonsCount)) {
+                while (arr.length < (props.startPolygonsCount)) {
                     var randomnumber = _.random(1, 13);
                     var found = false;
                     for (var i = 0; i < arr.length; i++) {
-                        if (arr[i] === randomnumber || randomnumber === 7) {
+                        if (arr[i] === randomnumber) {
                             found = true;
                             break;
                         }
                     }
-                    if (!found) {
+                    if (!found && randomnumber !== 7) {
                         arr[arr.length] = randomnumber;
 
                     }
@@ -234,13 +233,13 @@ define(function(require) {
 
                     if (parseInt(props.sumText.attr('text'), 10) === sum) {
 
-                        if (props.level === 9) {
+                        if (props.startPolygonsCount === 12) {
                             alert('Great! You win!!!');
                         } else {
                             props.sumPolygon.animate({
                                 'stroke-opacity': 1
                             }, 700, function() {
-                                props.level += 1;
+                                props.startPolygonsCount += 1;
                                 resetDesk();
                                 start();
                             });
