@@ -22,7 +22,7 @@ define(function(require) {
             return polygon;
         },
             createText = function(props) {
-                var text = props.paper.text(props.startX, props.startY, _.random(1, 1));
+                var text = props.paper.text(props.startX, props.startY, _.random(2, 9));
                 text.attr({
                     'font-family': 'Lato, sans-serif',
                     'font-size': '25',
