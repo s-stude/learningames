@@ -13,13 +13,11 @@ define(function(require) {
                     holder: overrides.holder,
                     paperWidth: overrides.paperWidth,
                     paperHeight: overrides.paperHeight
-
                 };
 
                 for (var p in computed) {
                     props[p] = computed[p];
                 }
-
             },
 
             init = function(overrides) {
@@ -36,8 +34,6 @@ define(function(require) {
                 props.polygons = props.paper.set();
                 props.texts = props.paper.set();
 
-
-
                 for (var i = 1; i <= 13; i++) {
 
                     if (i === 5) {
@@ -50,7 +46,6 @@ define(function(require) {
                         if (i !== 0) {
                             startX += 150;
                         }
-
                     }
 
                     var polygon = Polygon.create({
@@ -84,9 +79,6 @@ define(function(require) {
                         props.texts.push(text);
 
                     }
-
-
-
                 }
 
                 props.startPolygonsCount = 3;
@@ -112,7 +104,6 @@ define(function(require) {
                     }
                     if (!found && randomnumber !== 7) {
                         arr[arr.length] = randomnumber;
-
                     }
                 }
 
@@ -127,7 +118,6 @@ define(function(require) {
                 props.texts.forEach(function(t) {
                     if (_.contains(arr, t.data('index'))) {
                         props.activeT.push(t);
-
                     }
                 });
 
@@ -136,7 +126,6 @@ define(function(require) {
 
                 displayActivePolygons();
                 displayActiveText();
-
             },
 
 
@@ -151,8 +140,6 @@ define(function(require) {
                     props.activeP[index].click(polygonClick);
                     animateNext(++index);
                 });
-
-
             },
 
             animateNext = function(index) {
@@ -165,9 +152,7 @@ define(function(require) {
                         props.activeP[index].click(polygonClick);
                         animateNext(++index);
                     });
-
                 }
-
             },
 
             displayActiveText = function() {
@@ -180,7 +165,6 @@ define(function(require) {
                     props.activeT[index].click(polygonClick);
                     animateTNext(++index);
                 });
-
             },
 
             animateTNext = function(index) {
@@ -208,7 +192,6 @@ define(function(require) {
                     }, 300);
                     props.sumText.click(polygonSumClick);
                 }
-
             },
 
             sumValue = function() {
@@ -218,8 +201,6 @@ define(function(require) {
                 var sum = 0;
                 for (var i = 0; i < shuffleT.length - 1; ++i) {
                     sum += parseInt(shuffleT[i].attr('text'), 10);
-
-
                 }
                 return sum;
             },
@@ -243,12 +224,9 @@ define(function(require) {
                                 resetDesk();
                                 start();
                             });
-
                         }
-
                     }
                 }
-
             },
 
             resetDesk = function() {
@@ -256,7 +234,6 @@ define(function(require) {
                 props.activeT.clear();
                 props.selectedP.clear();
                 props.selectedT.clear();
-
 
                 props.polygons.forEach(function(p) {
                     p.attr({
@@ -274,9 +251,6 @@ define(function(require) {
                 });
                 props.sumPolygon.unclick(polygonSumClick);
                 props.sumText.unclick(polygonSumClick);
-
-
-
             },
 
 
@@ -303,8 +277,6 @@ define(function(require) {
                             p.data('selected', 'false');
                             props.selectedP.pop(p);
                         }
-
-
                     }
                 });
 
@@ -318,14 +290,9 @@ define(function(require) {
                             t.data('selected', 'false');
                             props.selectedT.pop(t);
                         }
-
-
                     }
                 });
-
-
             };
-
 
         return {
             init: init
