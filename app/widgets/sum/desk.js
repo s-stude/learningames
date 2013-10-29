@@ -206,7 +206,7 @@ define(function(require) {
             },
 
             polygonSumClick = function() {
-                if (props.selectedP.length === props.activeP.length - 1) {
+                if (props.selectedT.length === props.activeP.length - 1) {
                     var sum = 0;
                     props.selectedT.forEach(function(t) {
                         sum += parseInt(t.attr('text'), 10);
@@ -284,11 +284,10 @@ define(function(require) {
                     if (t.data('index') === index) {
                         if (t.data('selected') !== 'true') {
                             t.data('selected', 'true');
-                            props.selectedT.push(t);
-
+							props.selectedT.push(t);
                         } else {
                             t.data('selected', 'false');
-                            props.selectedT.pop(t);
+							props.selectedT.pop(t);
                         }
                     }
                 });
