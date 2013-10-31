@@ -4,13 +4,21 @@
 }
 
 
-#circle_view__elements .product
+#value
 {
 	margin-bottom: 0;
-	width: 45px;
+	width: 35px;
 	color: #1ABC9C;
 	font-size: 30px;
 	border: 2px solid #EC7063;
+	padding: 15px 23px;
 	
+}
+
+#calcPanel>.btn-group>.btn
+{
+font-size: 30px;
+padding: 15px 23px;
+margin: 0.5px 1px;
 }
 
