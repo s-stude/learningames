@@ -1,5 +1,4 @@
 define( function (require) {
-
     var _ = require('Underscore');
     var Backbone = require('Backbone');
     var PlankView = require('./plankView');

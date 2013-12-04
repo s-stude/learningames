@@ -1,7 +1,6 @@
 define(function (require) {
     var _ = require('Underscore');
     var Backbone = require('Backbone');
-
     var Desk = require('./desk');
     var plankViewTemplate = require('text!./templates/plankView.html');
 
@@ -22,9 +21,8 @@ define(function (require) {
         },
 
         events:{
-
             'click #btnstartgame':'startGame',
-            'click #btn-play-again':'playAgagin'
+            'click #btn-play-again':'playAgain'
         },
 
         startGame:function () {
@@ -43,8 +41,8 @@ define(function (require) {
                 plankHeight:100,
                 planksCount:20
             });
+            $('#endOfGame').toggleClass('hide');
         },
-
 
         render:function () {
             this.$el.append(plankViewTemplate);
