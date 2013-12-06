@@ -6,11 +6,12 @@
 #value
 {
     margin-bottom: 0;
-    width: 35px;
+    width: 40px;
     color: #1ABC9C;
     font-size: 30px;
     border: 2px solid #EC7063;
     padding: 15px 23px;
+    text-indent: 0px;
 }
 
 #calcPanel>.btn-group>.btn
