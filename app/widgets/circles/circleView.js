@@ -14,6 +14,19 @@ define( function(require) {
 			this.render();
 			Desk.init('circle_view__paper');
 		},
+                
+                events:{
+                    'click #pause': 'pause',
+                    'click #reset': 'reset'
+                },
+                
+                pause:function(){
+                    Desk.pause();
+                },
+                
+                reset:function(){
+                    Desk.reset();
+                },
 
 		render: function() {
 			this.$el.append(circleViewTemplate);

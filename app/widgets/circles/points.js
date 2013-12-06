@@ -69,7 +69,6 @@ define( function(require) {
 			props.generalCount = 0;
 			props.stopWatchTime = 180000;
 			props.end = false;
-
 		},
 
 		updatePoints = function(result) {
@@ -80,8 +79,8 @@ define( function(require) {
 				text: props.points
 			});
 		},
-
-		updateCount = function(paper) {
+                
+                updateCount = function(paper) {
 
 			props.generalCount += 1;
 
@@ -138,6 +137,16 @@ define( function(require) {
 			});
 
 		},
+                
+                resetPoints = function(paper)
+                {
+                    initProps();
+                    props.pointsValue.attr({text: props.points});
+                    props.failValue.attr({text: props.fail});
+                    props.successValue.attr({text: props.success});
+                    props.countValue.attr({text: props.generalCount});
+                    stopWatchReset(paper);
+                },
 
 		stopWatch = function(paper) {
 
@@ -168,6 +177,15 @@ define( function(require) {
 		stopWatchResume = function() {
 			props.indicatorArc.resume();
 		},
+                
+                stopWatchReset = function(paper){
+                    props.indicatorArc.remove();
+                    props.indicatorArc = paper.path().attr({
+				"stroke": "#1ABC9C",
+				"stroke-width": 25,
+				arc: [50, 470, 0, 60, 15]
+			});
+                },
 
 		endofGame = function() {
 			return props.end;
@@ -239,6 +257,7 @@ define( function(require) {
 
 		return {
 			init: init,
+                        initProps: initProps,
 			updatePoints: updatePoints,
 			updateCount: updateCount,
 			updateSuccess: updateSuccess,
@@ -247,7 +266,8 @@ define( function(require) {
 			stopWatchPause: stopWatchPause,
 			stopWatchResume: stopWatchResume,
 			endOfGame: endofGame,
-			updateInterval: updateInterval
+			updateInterval: updateInterval,
+                        resetPoints: resetPoints
 		};
 
 	})();
