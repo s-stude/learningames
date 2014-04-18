@@ -1,9 +1,9 @@
-define(function(require) {
+define(function (require) {
     var _ = require('Underscore');
 
-    return (function() {
+    return (function () {
 
-        var create = function(props) {
+        var create = function (props) {
 
             var polygon = props.paper.path('M' + props.startX + ',' + props.startY + ",l-60,-30l0,-60l60,-30l60,30l0,60z");
 
@@ -13,7 +13,7 @@ define(function(require) {
                 'stroke-width': 4,
                 fill: 'white',
                 cursor: 'pointer'
- 
+
             });
 
             polygon.data('index', props.index);
@@ -21,7 +21,7 @@ define(function(require) {
 
             return polygon;
         },
-            createText = function(props) {
+            createText = function (props) {
                 var text = props.paper.text(props.startX, props.startY, _.random(2, 9));
                 text.attr({
                     'font-family': 'Lato, sans-serif',
